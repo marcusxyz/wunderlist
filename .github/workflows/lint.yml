@@ -15,3 +15,6 @@ jobs:
           php-version: 8.1
           tools: phpcs
       - run: phpcs --standard=PSR12 --colors -n .
+
+      - run: npm install prettier
+      - run: npx prettier --single-quote --check .
