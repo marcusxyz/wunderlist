@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <a href="#"><?= $config['title']; ?></a>
+    <a href="/index.php"><?= $config['title']; ?></a>
 
     <ul>
         <li class="nav-item">
