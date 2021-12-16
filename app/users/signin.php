@@ -19,7 +19,6 @@ if (isset($_POST['email'], $_POST['password'])) {
 
     // If user is found, compare given password to password in db with password_verify
     if (password_verify($_POST['password'], $user['password'])) {
-
         // If password checks out save the user in session. Don't save password in session.
         unset($user['password']);
 
