@@ -1,10 +1,7 @@
 <?=
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/general/header.php';
-
-$errors = $_SESSION['error-message'] ?? '';
-unset($_SESSION['error-message']);
-
+require __DIR__ . '/general/notifications.php';
 ?>
 
 <!-- Sign me in here -->
@@ -16,10 +13,8 @@ unset($_SESSION['error-message']);
 <article>
     <h1>Sign up</h1>
 
-    <?php if ($errors !== '') : ?>
-        <div class="error">
-            <?php echo $errors; ?>
-        </div>
+    <?php if ($error !== '') : ?>
+        <p><?php echo $error; ?></p>
     <?php endif; ?>
 
     <form action="app/users/signup-process.php" method="post">
