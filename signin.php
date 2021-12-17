@@ -2,8 +2,8 @@
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/general/header.php';
 
-$message = $_SESSION['error-message'] ?? '';
-unset($_SESSION['error-message']);
+$message = $_SESSION['message'] ?? '';
+unset($_SESSION['message']);
 
 ?>
 

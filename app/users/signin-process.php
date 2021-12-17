@@ -29,5 +29,6 @@ if (isset($_POST['email'], $_POST['password'])) {
         redirect('/');
     } else {
         $_SESSION['error-message'] = 'The provided credentials does not match our records!';
+        redirect('/signin.php');
     }
 }
