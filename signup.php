@@ -11,8 +11,12 @@ require __DIR__ . '/general/header.php';
 
 <article>
     <h1>Sign up</h1>
-
-    <form action="app/users/signup.php" method="post">
+    <?php if (isset($errors)) : ?>
+        <?php foreach ($errors as $error) : ?>
+            <p><?= $error; ?></p>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <form action="app/users/signup-process.php" method="post">
         <div class="form">
             <label for="email">Name</label>
             <input class="form-input" type="name" name="name" id="name" required>
@@ -31,7 +35,7 @@ require __DIR__ . '/general/header.php';
         </div>
         <small class="form-message password">Use 8 or more characters with a mix of letters, numbers & symbols</small>
 
-        <button type="submit" class="btn btn-primary">Sign up</button>
+        <button type="submit" name="submit" class="btn btn-primary">Sign up</button>
         <small class="form-message">Do you have an account? <a href="/signin.php">Sign in here</a></small>
     </form>
 </article>

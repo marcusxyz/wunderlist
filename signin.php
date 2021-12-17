@@ -5,6 +5,8 @@ require __DIR__ . '/general/header.php';
 $message = $_SESSION['message'] ?? '';
 unset($_SESSION['message']);
 
+$errors = [];
+
 ?>
 
 <!-- Sign me in here -->
@@ -16,8 +18,12 @@ unset($_SESSION['message']);
 <article>
 
     <h1>Sign in</h1>
-
     <form action="app/users/signin.php" method="post">
+        <?php if (isset($errors)) : ?>
+            <?php foreach ($errors as $error) : ?>
+                <p><?= $error; ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
         <div class="form">
             <label for="email">Email</label>
             <input class="form-input" type="email" name="email" id="email" required>

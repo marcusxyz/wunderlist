@@ -6,6 +6,8 @@ require __DIR__ . '/../autoload.php';
 
 // Check if email and password exist in the POST request.
 
+$errors = [];
+
 if (isset($_POST['email'], $_POST['password'])) {
     // Sanitize email
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
@@ -24,6 +26,8 @@ if (isset($_POST['email'], $_POST['password'])) {
 
         $_SESSION['user'] = $user;
         $_SESSION['message'] = 'Welcome ' . $user['name'] . ', here\'s your tasks.';
+        header('Location: /index.php');
+    } else {
+        $errors[] = 'The provided credentials does not match our records!';
     }
-    header('Location: /index.php');
 }
