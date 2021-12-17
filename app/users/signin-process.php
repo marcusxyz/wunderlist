@@ -26,8 +26,8 @@ if (isset($_POST['email'], $_POST['password'])) {
 
         $_SESSION['user'] = $user;
         $_SESSION['message'] = 'Welcome ' . $user['name'] . ', here\'s your tasks.';
-        header('Location: /index.php');
+        redirect('/');
     } else {
-        $errors[] = 'The provided credentials does not match our records!';
+        $_SESSION['error-message'] = 'The provided credentials does not match our records!';
     }
 }

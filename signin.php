@@ -2,10 +2,8 @@
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/general/header.php';
 
-$message = $_SESSION['message'] ?? '';
-unset($_SESSION['message']);
-
-$errors = [];
+$message = $_SESSION['error-message'] ?? '';
+unset($_SESSION['error-message']);
 
 ?>
 
@@ -18,11 +16,9 @@ $errors = [];
 <article>
 
     <h1>Sign in</h1>
-    <form action="app/users/signin.php" method="post">
-        <?php if (isset($errors)) : ?>
-            <?php foreach ($errors as $error) : ?>
-                <p><?= $error; ?></p>
-            <?php endforeach; ?>
+    <form action="app/users/signin-process.php" method="post">
+        <?php if ($message !== '') : ?>
+            <p><?php echo $message; ?></p>
         <?php endif; ?>
         <div class="form">
             <label for="email">Email</label>

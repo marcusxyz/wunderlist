@@ -4,7 +4,7 @@ require __DIR__ . '/general/header.php';
 
 // If user is not signed in, send user to /signin.php
 if (!isset($_SESSION['user'])) {
-    header('Location: /signin.php');
+    redirect('/signin.php');
 }
 
 $message = $_SESSION['message'] ?? '';
@@ -12,8 +12,6 @@ unset($_SESSION['message']);
 
 // $passord = '123';
 // $hash = password_hash($passord, PASSWORD_DEFAULT);
-
-// echo $hash;
 
 ?>
 
