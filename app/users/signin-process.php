@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-// Check if email and password exist in the POST request.
+$error = [];
 
-$errors = [];
+// Check if email and password exist in the POST request.
 
 if (isset($_POST['email'], $_POST['password'])) {
     // Sanitize email
@@ -19,16 +19,27 @@ if (isset($_POST['email'], $_POST['password'])) {
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+    // Check if user exist, otherwise provide a sign up message
+    if ($user === false) {
+        $_SESSION['error'] = 'The email does not exist, try signing up!';
+        redirect('/signin.php');
+    }
+
+    // Password errors
     // If user is found, compare given password to password in db with password_verify
-    if (password_verify($_POST['password'], $user['password'])) {
+    if (password_verify($password, $user['password'])) {
         // If password checks out save the user in session. Don't save password in session.
+        $_SESSION['user'] = [
+            'id' => $user['id'],
+            'name' => $user['name'],
+            'email' => $user['email'],
+        ];
         unset($user['password']);
 
-        $_SESSION['user'] = $user;
         $_SESSION['message'] = 'Welcome ' . $user['name'] . ', here\'s your tasks.';
         redirect('/');
     } else {
-        $_SESSION['error'] = 'The provided credentials does not match our records!';
+        $_SESSION['error'] = 'The provided credentials does not match our records.';
         redirect('/signin.php');
     }
 }

@@ -17,4 +17,8 @@ if (!isset($_SESSION['user'])) {
 
 <article>
     <h1><?php echo $config['title']; ?></h1>
+
+    <?php if ($message !== '') : ?>
+        <p><?php echo $message; ?></p>
+    <?php endif; ?>
 </article>
