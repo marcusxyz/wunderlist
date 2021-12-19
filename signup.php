@@ -19,7 +19,7 @@ require __DIR__ . '/general/notifications.php';
 
     <form action="app/users/signup-process.php" method="post">
         <div class="form">
-            <label for="email">Name</label>
+            <label for="email">Username</label>
             <input class="form-input" type="name" name="name" id="name" required>
         </div>
         <div class="form">
