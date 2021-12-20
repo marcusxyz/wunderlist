@@ -5,35 +5,38 @@ require __DIR__ . '/general/notifications.php';
 ?>
 
 <!-- Sign me in here -->
+<section class="signinout-container">
+    <div class="image-container">
+        <img src="/assets/images/main-img-min.webp" alt="">
+    </div>
 
-<div class="image-container">
-    <img src="" alt="">
-</div>
+    <article>
+        <div class="form-content">
 
-<article>
+            <h1>Sign in</h1>
 
-    <h1>Sign in</h1>
+            <?php if ($error !== '') : ?>
+                <p class="error"><?php echo $error; ?></p>
+            <?php endif; ?>
 
-    <?php if ($error !== '') : ?>
-        <p><?php echo $error; ?></p>
-    <?php endif; ?>
+            <?php if ($message !== '') : ?>
+                <p class="success"><?php echo $message; ?></p>
+            <?php endif; ?>
 
-    <?php if ($message !== '') : ?>
-        <p><?php echo $message; ?></p>
-    <?php endif; ?>
+            <form class="sign-in" action="app/users/signin-process.php" method="post">
 
-    <form action="app/users/signin-process.php" method="post">
+                <div class="form">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="form">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
 
-        <div class="form">
-            <label for="email">Email</label>
-            <input class="form-input" type="email" name="email" id="email" required>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                <small class="form-message">Don’t have an account yet? <a class="highlight" href="/signup.php">Sign up here</a></small>
+            </form>
         </div>
-        <div class="form">
-            <label for="password">Password</label>
-            <input class="form-input" type="password" name="password" id="password" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Sign in</button>
-        <small class="form-message">Don’t have an account yet? <a href="/signup.php">Sign up here</a></small>
-    </form>
-</article>
+    </article>
+</section>

@@ -14,21 +14,19 @@ if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-
     if (!preg_match("#.*^(?=.{8,20})(?=.*[0-9]).*$#", $passphrase)) {
         $_SESSION['error'] = 'Password did not meet requirements below';
         redirect('/signup.php');
-        die();
     }
 
     // Check if password matches before adding
     if ($passphrase !== $confirmPassphrase) {
         $_SESSION['error'] = 'Your password doesn\'t match, please try again';
         redirect('/signup.php');
-        die();
     } else {
         $password = password_hash($passphrase, PASSWORD_DEFAULT);
     }
 
     // Check username requirements (Only letters and numbers allowed)
     if (!ctype_alnum($username)) {
-        $_SESSION['error'] = 'Username should only contain letters and numbers';
+        $_SESSION['error'] = 'Username should only contain letters and numbers. No spaces allowed.';
         redirect('/signup.php');
     }
 
@@ -68,3 +66,4 @@ if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-
     $_SESSION['message'] = 'Your account has been created! Please sign in below.';
     redirect('/signin.php');
 }
+redirect('/signup.php');
