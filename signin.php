@@ -18,6 +18,10 @@ require __DIR__ . '/general/notifications.php';
         <p><?php echo $error; ?></p>
     <?php endif; ?>
 
+    <?php if ($message !== '') : ?>
+        <p><?php echo $message; ?></p>
+    <?php endif; ?>
+
     <form action="app/users/signin-process.php" method="post">
 
         <div class="form">

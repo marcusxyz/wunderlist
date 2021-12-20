@@ -26,28 +26,47 @@ if (isset($_POST['submit-signup'])) {
         $password = password_hash($passphrase, PASSWORD_DEFAULT);
     }
 
+    // Check username requirements (Only letters and numbers allowed)
+    if (ctype_alnum($username)) {
+        // Username valid
+    } else {
+        $_SESSION['error'] = 'Username should only contain letters and numbers';
+        redirect('/signup.php');
+    }
+
     $statement = $database->prepare('SELECT * FROM users WHERE email = :email');
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->execute();
 
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    $checkUserEmail = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // Check if user exists in database
-    if ($user !== false) {
-        $_SESSION['error'] = 'Seems like the email exist, try signing in!';
+    // Check if email exists in database
+    if ($checkUserEmail !== false) {
+        $_SESSION['error'] = 'Seems like this email exist, try signing in!';
         redirect('/signup.php');
-        die();
     }
 
-    $statement = $database->prepare('INSERT INTO users(name, email, password) VALUES(:name, :email, :password)');
-
+    // Check if username exists in database
+    $statement = $database->prepare('SELECT * FROM users WHERE name = :name');
     $statement->bindParam(':name', $username, PDO::PARAM_STR);
-    $statement->bindParam(':email', $email, PDO::PARAM_STR);
-    $statement->bindParam(':password', $password, PDO::PARAM_STR);
-
     $statement->execute();
 
-    echo 'Account created!';
-    // redirect('/signin.php');
+    $checkUsername = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if ($checkUsername !== false) {
+        $_SESSION['error'] = 'This username is in use, please try a different name.';
+        redirect('/signup.php');
+    } else {
+        $statement = $database->prepare('INSERT INTO users(name, email, password) VALUES(:name, :email, :password)');
+
+        $statement->bindParam(':name', $username, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        $_SESSION['message'] = 'Your account has been created! Please sign in below.';
+        redirect('/signin.php');
+    }
 }
 redirect('/signin.php');
