@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-if (isset($_POST['submit-signup'])) {
+if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
     $username = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING));
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $passphrase = $_POST['password'];
     $confirmPassphrase = $_POST['password-confirm'];
 
     // Validate passphrase requirements
-    if (!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $passphrase)) {
+    if (!preg_match("#.*^(?=.{8,20})(?=.*[0-9]).*$#", $passphrase)) {
         $_SESSION['error'] = 'Password did not meet requirements below';
         redirect('/signup.php');
         die();

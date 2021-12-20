@@ -34,7 +34,7 @@ require __DIR__ . '/general/notifications.php';
             <label for="password-confirm">Confirm password</label>
             <input class="form-input" type="password" name="password-confirm" id="password-confirm" required>
         </div>
-        <small class="form-message password">Use 8 or more characters with a mix of letters and numbers.</small>
+        <small class="form-message password">Password needs to be atleast 8 characters long.</small>
 
         <button type="submit" name="submit-signup" class="btn btn-primary">Sign up</button>
         <small class="form-message">Do you have an account? <a href="/signin.php">Sign in here</a></small>
