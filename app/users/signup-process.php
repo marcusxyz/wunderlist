@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
-    $username = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING));
+    $username = trim($_POST['name']); // FILTER_SANITIZE_STRING is deprecated.
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $passphrase = $_POST['password'];
     $confirmPassphrase = $_POST['password-confirm'];
