@@ -7,9 +7,9 @@ require __DIR__ . '/../autoload.php';
 // When submitting, store values into lists and tasks tables
 if (isset($_POST['title'], $_POST['due_date'], $_POST['task_notes'])) {
     // echo 'Inserting to db';
-    $title = filter_var(htmlspecialchars($_POST['title']));
-    $dueDate = filter_var($_POST['due_date']);
-    $taskNotes = filter_var(htmlspecialchars($_POST['task_notes']));
+    $title = trim($_POST['title']);
+    $dueDate = trim($_POST['due_date']);
+    $taskNotes = trim($_POST['task_notes']);
 
     // Insert $title, $dueDate and $taskNotes into tasks table
     $statement = $database->prepare('INSERT INTO tasks(title, due_date, task_notes) VALUES(:title, :due_date, :task_notes)');
