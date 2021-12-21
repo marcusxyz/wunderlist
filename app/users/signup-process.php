@@ -11,8 +11,8 @@ if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-
     $confirmPassphrase = $_POST['password-confirm'];
 
     // Validate passphrase requirements
-    if (!preg_match("#.*^(?=.{8,20})(?=.*[0-9]).*$#", $passphrase)) {
-        $_SESSION['error'] = 'Password did not meet requirements below';
+    if (strlen($passphrase) < 8) {
+        $_SESSION['error'] = 'Password needs to be atleast 8 characters or longer';
         redirect('/signup.php');
     }
 
