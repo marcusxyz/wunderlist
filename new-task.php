@@ -29,7 +29,6 @@ require __DIR__ . '/general/notifications.php';
                 <div class="form">
                     <label for="task_notes">Note</label>
                     <textarea type="text" name="task_notes" id="task_notes"></textarea optional>
-                    <small class="form-message password">Password needs to be atleast 8 characters long.</small>
                 </div>
 
                 <button type="submit" name="submit-task" class="btn btn-full">Add new task</button>
