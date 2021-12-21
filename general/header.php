@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/navigation.css">
     <link rel="stylesheet" href="../css/signinandout.css">
+    <link rel="stylesheet" href="../css/index.css">
     <title><?= $config['title']; ?></title>
 </head>
 

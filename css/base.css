@@ -38,6 +38,7 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   padding: 0;
   margin: 0;
@@ -77,7 +78,8 @@ ul {
   background-color: var(--purple);
 }
 
-input {
+input,
+textarea {
   width: 100%;
   background-color: var(--form-gray);
   color: var(--black);
@@ -86,6 +88,10 @@ input {
   outline: none;
   padding: 1rem;
   transition: all 0.2s;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .form {
@@ -122,8 +128,8 @@ label {
   padding: 1rem;
 }
 
-.btn.btn-primary {
-  width: 100%;
+.btn.btn-full,
+.btn.btn-half {
   font-size: var(--p);
   color: var(--white);
   background-color: var(--black);
@@ -131,6 +137,14 @@ label {
   margin-top: 1rem;
   cursor: pointer;
   transition: 0.2s ease;
+}
+
+.btn.btn-full {
+  width: 100%;
+}
+
+.btn.btn-half {
+  width: 50%;
 }
 
 .btn:hover {

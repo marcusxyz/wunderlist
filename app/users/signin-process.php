@@ -35,8 +35,7 @@ if (isset($_POST['email'], $_POST['password'])) {
             'email' => $user['email'],
         ];
         unset($user['password']);
-
-        $_SESSION['message'] = 'Welcome ' . $user['name'] . ', here\'s your tasks.';
+        $_SESSION['message'] = 'Welcome back ' . $user['name'] . '!';
         redirect('/');
     } else {
         $_SESSION['error'] = 'The provided credentials does not match our records.';

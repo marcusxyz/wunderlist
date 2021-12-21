@@ -36,7 +36,7 @@ require __DIR__ . '/general/notifications.php';
                     <input type="password" name="password-confirm" id="password-confirm" required>
                 </div>
 
-                <button type="submit" name="submit-signup" class="btn btn-primary">Sign up</button>
+                <button type="submit" name="submit-signup" class="btn btn-full">Sign up</button>
                 <small class="form-message">Do you have an account? <a href="/signin.php">Sign in here</a></small>
             </form>
         </div>
