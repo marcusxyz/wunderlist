@@ -1,12 +1,12 @@
 INSERT MANDATORY GIF
 
-# Project Title
+# Wunderlist - A simple to do list
 
 Text about the project and why it exists. This would also be a great place to link the project online.
 
 # Installation
 
-Add the installation instructions.
+
 
 # Code Review
 
