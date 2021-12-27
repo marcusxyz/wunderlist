@@ -28,13 +28,14 @@ if (isset($_POST['email'], $_POST['password'])) {
     // Password errors
     // If user is found, compare given password to password in db with password_verify
     if (password_verify($password, $user['password'])) {
-        // If password checks out save the user in session. Don't save password in session.
+
         $_SESSION['user'] = [
             'id' => $user['id'],
             'name' => $user['name'],
             'email' => $user['email'],
         ];
-        unset($user['password']);
+        // unset($user['password']); This also hides other session values on refresh..
+
         $_SESSION['message'] = 'Welcome back ' . $user['name'] . '!';
         redirect('/');
     } else {

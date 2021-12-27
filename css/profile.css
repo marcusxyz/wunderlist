@@ -18,7 +18,7 @@ div.change-pfp {
   padding: 3rem 0;
 }
 
-.image-container {
+.profile-container {
   position: relative;
   height: 240px;
   width: 240px;
@@ -26,7 +26,7 @@ div.change-pfp {
   border-radius: 100%;
 }
 
-.image-container img {
+.profile-container img {
   position: absolute;
   width: 100%;
   height: 100%;

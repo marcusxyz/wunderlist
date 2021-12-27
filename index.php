@@ -15,7 +15,6 @@ if (isset($_POST['new-task'])) {
 ?>
 
 <!-- Here is where the tasks will be -->
-
 <div class="welcome-content">
     <?php if ($message !== '') : ?>
         <p class="success"><?php echo $message; ?></p>
@@ -26,6 +25,7 @@ if (isset($_POST['new-task'])) {
         <button class="btn btn-half">New task</button>
     </a>
 </div>
+<?php print_r($_SESSION['user']); ?>
 
 <section class="task-container">
     <div class="task-item empty">
