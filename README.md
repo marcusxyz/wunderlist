@@ -6,7 +6,7 @@ Text about the project and why it exists. This would also be a great place to li
 
 # Installation
 
-
+Add the installation instructions.
 
 # Code Review
 
