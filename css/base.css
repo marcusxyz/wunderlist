@@ -129,18 +129,30 @@ label {
 }
 
 .btn.btn-full,
+.btn.secondary-full,
 .btn.btn-half {
   font-size: var(--p);
-  color: var(--white);
-  background-color: var(--black);
   border-radius: 0.25rem;
   margin-top: 1rem;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
+.btn.btn-full,
+.btn.btn-half {
+  background-color: var(--black);
+}
+
+.btn.secondary-full {
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid var(--black);
+}
+
 .btn.btn-full {
   width: 100%;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .btn.btn-half {
