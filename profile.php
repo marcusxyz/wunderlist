@@ -33,7 +33,7 @@ if (!isset($_SESSION['user'])) {
         <p class="success"><?php echo $message; ?></p>
     <?php endif; ?>
 
-    <form class="account-settings" action="app/users//update-profile.php" method="post">
+    <form action="app/users/update-profile.php" method="post" class="account-settings">
         <div class="form">
             <label for="name">Username</label>
             <input type="name" name="name" id="name" value="<?= $_SESSION['user']['name']; ?>">
@@ -56,8 +56,8 @@ if (!isset($_SESSION['user'])) {
             <label for="password-confirm">Confirm password</label>
             <input type="password" name="password-confirm" id="password-confirm">
         </div>
+        <button type="submit" name="save-changes" class="btn btn-full">Save Changes</button>
+        <button type="submit" name="delete-user" class="btn secondary-full">Delete account</button>
     </form>
-    <button type="submit" name="save-changes" class="btn btn-full">Save changes</button>
-    <button type="submit" name="save-changes" class="btn secondary-full">Delete account</button>
 
 </section>

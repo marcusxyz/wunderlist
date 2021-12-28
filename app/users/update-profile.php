@@ -4,45 +4,111 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-//In this file we want to update user settings
+$id = $_SESSION['user']['id'];
+$username = $_SESSION['user']['name'];
+$email = $_SESSION['user']['email'];
 
-// Username
-if (isset($_SESSION['user'])) {
-
-    // print_r($_SESSION['user']);
-
+// Check if the user has entered a different username
+if ($username !== $_POST['name']) {
+    // Change username
     if (isset($_POST['name'])) {
-        $username = trim($_POST['name']);
+        $username = trim($_POST['name']); // FILTER_SANITIZE_STRING is deprecated.
 
-        // Check username requirements
-        if (!ctype_alnum($username)) {
-            $_SESSION['error'] = 'Username should only contain letters and numbers';
-            redirect('/signup.php');
+        // Check if username exists in database
+        $statement = $database->prepare('SELECT * FROM users WHERE name = :name');
+        $statement->bindParam(':name', $username, PDO::PARAM_STR);
+        $statement->execute();
+
+        $checkUsername = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($checkUsername !== false) {
+            $_SESSION['error'] = 'This username has already been taken, please try a different name.';
+            redirect('/profile.php');
         }
+
+        // Check username requirements (Only letters and numbers allowed)
+        if (!ctype_alnum($username)) {
+            $_SESSION['error'] = 'Username should only contain letters and numbers. No spaces allowed.';
+            redirect('/profile.php');
+        }
+        // If everything checks out update value
+        $updstatement = $database->prepare('UPDATE users SET name = :name WHERE id = :id');
+        $updstatement->bindParam(':name', $username, PDO::PARAM_STR);
+        $updstatement->bindParam(':id', $id, PDO::PARAM_INT);
+        $updstatement->execute();
+
+        // Updating session variable
+        $_SESSION['user']['name'] = $username;
+        $_SESSION['message'] = 'Your username has been updated';
+        redirect('/profile.php');
     }
 }
 
-// Fetch Username and add it to input value
+if ($email !== $_POST['email']) {
+    // Change email
+    if (isset($_POST['email'])) {
+        $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+        // Check if email exists in database
+        $statement = $database->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->execute();
 
+        $checkUserEmail = $statement->fetch(PDO::FETCH_ASSOC);
 
-//Email
-// Fetch Email and add it to input value
+        if ($checkUserEmail !== false) {
+            $_SESSION['error'] = 'Seems like this email exist, try signing in!';
+            redirect('/profile.php');
+        }
+        // If everything checks out update value
+        $statement = $database->prepare('UPDATE users SET email = :email WHERE id = :id');
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindPARAM(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
 
-$statement = $database->prepare("SELECT * FROM users WHERE name = $user");
-$statement->execute();
+        // Updating session variable
+        $_SESSION['user']['email'] = $email;
+        $_SESSION['message'] = 'Your email has been updated';
+        redirect('/profile.php');
+    }
+}
 
-$username = $statement->fetchAll(PDO::FETCH_ASSOC);
+// If fields are unchanged while saving, display this error
+if ($username === $_POST['name'] && $email === $_POST['email']) {
+    $_SESSION['error'] = 'No changes has been made';
+}
 
-echo $_SESSION['user'];
-var_dump($_SESSION);
+// Change password
+if (isset($_POST['password'], $_POST['password-new'], $_POST['password-confirm'])) {
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $oldPassphrase = $_POST['password'];
+    $newPassphrase = $_POST['password-new'];
+    $confirmPassphrase = $_POST['password-confirm'];
 
-die(var_dump($username));
+    $statement = $database->prepare('SELECT password FROM users');
+    $statement->execute();
 
-// $_SESSION['user'] = [
-//     'id' => $user['id'],
-// ];
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-//Password
-    // Check if old password is correct
+    // Verify password before applying for a new password
+    if (password_verify($oldPassphrase, $user['password'])) {
+        // Validate passphrase requirements
+        if (strlen($newPassphrase) < 8) {
+            $_SESSION['error'] = 'Your new password needs to be atleast 8 characters or longer';
+            redirect('/profile.php');
+        }
+        // Check if password matches, if true hash it
+        if ($newPassphrase !== $confirmPassphrase) {
+            $_SESSION['error'] = 'Your password doesn\'t match, please try again';
+            redirect('/profile.php');
+        } else {
+            $password = password_hash($newPassphrase, PASSWORD_DEFAULT);
+            $_SESSION['message'] = 'Your password has been updated';
+            redirect('/profile.php');
+        }
+        $_SESSION['error'] = 'Your old password has been entered incorrectly. Please enter it again.';
+        redirect('/profile.php');
+    }
 
-    // Compare new password with confirm password, if its true update password in database.
+    // If everything checks out update value
+}
+redirect('/profile.php');

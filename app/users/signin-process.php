@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-$error = [];
-
 // Check if email and password exist in the POST request.
 
 if (isset($_POST['email'], $_POST['password'])) {
@@ -28,7 +26,6 @@ if (isset($_POST['email'], $_POST['password'])) {
     // Password errors
     // If user is found, compare given password to password in db with password_verify
     if (password_verify($password, $user['password'])) {
-
         $_SESSION['user'] = [
             'id' => $user['id'],
             'name' => $user['name'],
