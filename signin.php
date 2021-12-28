@@ -27,11 +27,11 @@ require __DIR__ . '/general/notifications.php';
 
                 <div class="form">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" required>
                 </div>
                 <div class="form">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" name="password" id="password" placeholder="••••••••" required>
                 </div>
 
                 <button type="submit" class="btn btn-full">Sign in</button>

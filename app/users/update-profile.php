@@ -87,8 +87,7 @@ if ($username === $_POST['name'] && $email === $_POST['email'] && !empty($_POST[
 
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        // Password errors
-        // If user is found, compare given password to password in db with password_verify
+        // Compare given password to password in db with password_verify
         if (password_verify($password, $user['password'])) {
             $newPassphrase = $_POST['password-new'];
             $confirmPassphrase = $_POST['password-confirm'];

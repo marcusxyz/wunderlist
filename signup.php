@@ -20,20 +20,20 @@ require __DIR__ . '/general/notifications.php';
             <form action="app/users/signup-process.php" method="post">
                 <div class="form">
                     <label for="name">Username</label>
-                    <input type="name" name="name" id="name" required>
+                    <input type="name" name="name" id="name" placeholder="Enter your username" required>
                 </div>
                 <div class="form">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" required>
                 </div>
                 <div class="form">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
-                    <small class="form-message password">Password needs to be atleast 8 characters long.</small>
+                    <input type="password" name="password" id="password" placeholder="Must be atleast 8 characters long" required>
+                    <small class="form-message password"></small>
                 </div>
                 <div class="form">
                     <label for="password-confirm">Confirm password</label>
-                    <input type="password" name="password-confirm" id="password-confirm" required>
+                    <input type="password" name="password-confirm" id="password-confirm" placeholder="Confirm your password" required>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-full">Sign up</button>
