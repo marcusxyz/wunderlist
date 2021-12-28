@@ -33,9 +33,13 @@ div.change-pfp {
   object-fit: cover;
 }
 
-a.link-pfp {
+label.link-pfp {
   text-decoration: underline;
   margin-top: 1.5rem;
+}
+
+#upload {
+  display: none;
 }
 
 .account-settings p {

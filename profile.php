@@ -19,9 +19,21 @@ if (!isset($_SESSION['user'])) {
     <a href="/">Go back</a>
     <div class="change-pfp">
         <div class="profile-container">
-            <img src="#" alt="">
+            <img src="<?php if (isset($avatar)) echo $avatar; ?>" alt="">
         </div>
-        <a href="" class="link-pfp">Change profile picture</a>
+        <!-- <form action="app/users/update-avatar.php" method="POST" enctype="multipart/form-data">
+            <label for="upload" class="link-pfp">Change profile picture</label>
+            <input id="upload" type="file" name="file" accept=".jpg, .jpeg, .png">
+            <input type="submit">
+        </form> -->
+        <form action="app/users/update-avatar.php" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="avatar">Choose your avatar image to upload</label>
+                <input type="file" accept=".jpg, .jpeg, .png" name="avatar" id="avatar" required>
+            </div>
+
+            <button type="submit">Upload</button>
+        </form>
     </div>
 
     <?php if ($error !== '') : ?>
@@ -60,3 +72,5 @@ if (!isset($_SESSION['user'])) {
     </form>
 
 </section>
+
+<script src="/assets/js/index.js"></script>

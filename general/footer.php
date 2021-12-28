@@ -1,4 +1,4 @@
-<script src="#"></script>
+<script src="/assets/js/index.js"></script>
 </body>
 
 </html>
