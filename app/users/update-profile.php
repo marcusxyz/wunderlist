@@ -8,6 +8,11 @@ $id = $_SESSION['user']['id'];
 $username = $_SESSION['user']['name'];
 $email = $_SESSION['user']['email'];
 
+// If fields are unchanged while saving, display error message.
+if ($username === $_POST['name'] && $email === $_POST['email'] && empty($_POST['password']) && empty($_POST['password-new']) && empty($_POST['password-confirm'])) {
+    $_SESSION['error'] = 'No changes has been made';
+}
+
 // Check if the user has entered a different username
 if ($username !== $_POST['name']) {
     // Change username
@@ -44,6 +49,7 @@ if ($username !== $_POST['name']) {
     }
 }
 
+// Check if the user has entered a different email
 if ($email !== $_POST['email']) {
     // Change email
     if (isset($_POST['email'])) {
@@ -71,44 +77,85 @@ if ($email !== $_POST['email']) {
         redirect('/profile.php');
     }
 }
+if ($username === $_POST['name'] && $email === $_POST['email'] && !empty($_POST['password'])) {
+    if (isset($_POST['password'])) {
+        $password = $_POST['password'];
 
-// If fields are unchanged while saving, display this error
-if ($username === $_POST['name'] && $email === $_POST['email']) {
-    $_SESSION['error'] = 'No changes has been made';
-}
+        $statement = $database->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->execute();
 
-// Change password
-if (isset($_POST['password'], $_POST['password-new'], $_POST['password-confirm'])) {
-    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-    $oldPassphrase = $_POST['password'];
-    $newPassphrase = $_POST['password-new'];
-    $confirmPassphrase = $_POST['password-confirm'];
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $statement = $database->prepare('SELECT password FROM users');
-    $statement->execute();
+        // Password errors
+        // If user is found, compare given password to password in db with password_verify
+        if (password_verify($password, $user['password'])) {
+            $newPassphrase = $_POST['password-new'];
+            $confirmPassphrase = $_POST['password-confirm'];
 
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
+            // Make sure new password input is not empty
+            if (empty($newPassphrase) && empty($confirmPassphrase)) {
+                $_SESSION['error'] = 'New password cannot be empty.';
+                redirect('/profile.php');
+            }
 
-    // Verify password before applying for a new password
-    if (password_verify($oldPassphrase, $user['password'])) {
-        // Validate passphrase requirements
-        if (strlen($newPassphrase) < 8) {
-            $_SESSION['error'] = 'Your new password needs to be atleast 8 characters or longer';
-            redirect('/profile.php');
-        }
-        // Check if password matches, if true hash it
-        if ($newPassphrase !== $confirmPassphrase) {
-            $_SESSION['error'] = 'Your password doesn\'t match, please try again';
+            // Validate passphrase requirements
+            if (strlen($newPassphrase) < 8) {
+                $_SESSION['error'] = 'Your new password needs to be atleast 8 characters or longer';
+                redirect('/profile.php');
+            }
+
+            // Check if password matches, if true hash it
+            if ($newPassphrase !== $confirmPassphrase) {
+                $_SESSION['error'] = 'Your password doesn\'t match, please try again';
+                redirect('/profile.php');
+            } else {
+                $password = password_hash($newPassphrase, PASSWORD_DEFAULT);
+                $_SESSION['message'] = 'Your password has been updated';
+                redirect('/profile.php');
+            }
+
+            $_SESSION['message'] = 'Your old password is correct';
             redirect('/profile.php');
         } else {
-            $password = password_hash($newPassphrase, PASSWORD_DEFAULT);
-            $_SESSION['message'] = 'Your password has been updated';
+            $_SESSION['error'] = 'Your old password has been entered incorrectly.';
             redirect('/profile.php');
         }
-        $_SESSION['error'] = 'Your old password has been entered incorrectly. Please enter it again.';
-        redirect('/profile.php');
     }
-
-    // If everything checks out update value
 }
+
+// if (isset($_POST['password'])) {
+//     $oldPassphrase = $_POST['password'];
+
+//     // Verify password before applying for a new password
+//     if (password_verify($oldPassphrase, $user['password'])) {
+//         if (isset($_POST['password-new'], $_POST['password-confirm'])) {
+//             $newPassphrase = $_POST['password-new'];
+//             $confirmPassphrase = $_POST['password-confirm'];
+
+//             // Validate passphrase requirements
+//             if (strlen($newPassphrase) < 8) {
+//                 $_SESSION['error'] = 'Your new password needs to be atleast 8 characters or longer';
+//                 redirect('/profile.php');
+//             }
+
+//             // Check if password matches, if true hash it
+//             if ($newPassphrase !== $confirmPassphrase) {
+//                 $_SESSION['error'] = 'Your password doesn\'t match, please try again';
+//                 redirect('/profile.php');
+//             } else {
+//                 $password = password_hash($newPassphrase, PASSWORD_DEFAULT);
+//                 $_SESSION['message'] = 'Your password has been updated';
+//                 redirect('/profile.php');
+//             }
+//             redirect('/profile.php');
+//         }
+//     } else {
+//         $_SESSION['error'] = 'Your old password has been entered incorrectly. Please enter it again.';
+//         redirect('/profile.php');
+//     }
+// }
+
+// If everything checks out update value
+// $_SESSION['message'] = 'Hello there';
 redirect('/profile.php');

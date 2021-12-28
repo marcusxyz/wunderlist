@@ -17,7 +17,6 @@ if (!isset($_SESSION['user'])) {
 <!-- Manage your account -->
 <section class="profile">
     <a href="/">Go back</a>
-
     <div class="change-pfp">
         <div class="profile-container">
             <img src="#" alt="">
