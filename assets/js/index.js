@@ -1,3 +1,7 @@
-document.getElementById('upload').onchange = function () {
+document.getElementById('avatar').onchange = function () {
+  this.form.submit();
+};
+
+document.getElementById('remove-avatar').onchange = function () {
   this.form.submit();
 };

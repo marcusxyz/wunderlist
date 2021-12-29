@@ -30,6 +30,7 @@ if (isset($_POST['email'], $_POST['password'])) {
             'id' => $user['id'],
             'name' => $user['name'],
             'email' => $user['email'],
+            'avatar' => $user['avatar'],
         ];
         // unset($user['password']); This also hides other session values on refresh..
 

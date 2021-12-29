@@ -5,8 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 $id = $_SESSION['user']['id'];
-$username = $_SESSION['user']['name'];
-$email = $_SESSION['user']['email'];
+$userProfile = $_SESSION['user']['avatar'];
 
 // Image upload
 
@@ -14,7 +13,7 @@ if (isset($_FILES['avatar'])) {
     $avatar = $_FILES['avatar'];
 
     //Only allow .png and .jpg files.
-    if (!in_array($avatar['type'], ['image/jpeg', ['image/png']])) {
+    if (!in_array($avatar['type'], ['image/jpeg', 'image/pmg'])) {
         $_SESSION['error'] = 'You can only upload .jpeg or .png files.';
         redirect('/profile.php');
     }
@@ -25,12 +24,19 @@ if (isset($_FILES['avatar'])) {
         redirect('/profile.php');
     }
 
-
+    $userProfile = $id . '-' . date('ymd') . '-' . $avatar['name'];
     $folderPath = __DIR__ . '/../../uploads/';
-    $destination = $folderPath . date('ymd') . '-' . $_SESSION['user']['name'] . '-' . $avatar['name'];
+    $destination = $folderPath . $userProfile;
 
     move_uploaded_file($avatar['tmp_name'], $destination);
 
+    $statement = $database->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+    $statement->bindParam(':avatar', $userProfile, PDO::PARAM_STR);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
+
+    // Updating session variable
+    $_SESSION['user']['avatar'] = $userProfile;
     $_SESSION['message'] = 'Your profile picture has been updated!';
     redirect('/profile.php');
 } else {

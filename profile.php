@@ -5,12 +5,13 @@ declare(strict_types=1);
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/general/header.php';
 require __DIR__ . '/general/notifications.php';
-// require __DIR__ . '/app/users/update-profile.php';
 
 // If user is not signed in, send user to /signin.php
 if (!isset($_SESSION['user'])) {
     redirect('/signin.php');
 }
+
+$userProfile = $_SESSION['user']['avatar'];
 
 ?>
 
@@ -18,22 +19,28 @@ if (!isset($_SESSION['user'])) {
 <section class="profile">
     <a href="/">Go back</a>
     <div class="change-pfp">
+        <?= $userProfile; ?>
         <div class="profile-container">
-            <img src="<?php if (isset($avatar)) echo $avatar; ?>" alt="">
+            <?php if (file_exists(__DIR__ . '/uploads/' . $userProfile)) : ?>
+                <img src="/uploads/<?= $userProfile; ?>" alt="default profile picture for the user">
+            <?php else : ?>
+                <img src="/uploads/default.jpeg" alt="Default profile picture">
+            <?php endif; ?>
         </div>
-        <!-- <form action="app/users/update-avatar.php" method="POST" enctype="multipart/form-data">
-            <label for="upload" class="link-pfp">Change profile picture</label>
-            <input id="upload" type="file" name="file" accept=".jpg, .jpeg, .png">
-            <input type="submit">
-        </form> -->
-        <form action="app/users/update-avatar.php" method="post" enctype="multipart/form-data">
-            <div>
-                <label for="avatar">Choose your avatar image to upload</label>
-                <input type="file" accept=".jpg, .jpeg, .png" name="avatar" id="avatar" required>
-            </div>
+        <div class="links">
+            <form action="app/users/update-avatar.php" method="POST" enctype="multipart/form-data">
+                <label for="avatar" class="link-pfp">Change profile picture</label>
+                <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" style=" display: none;">
+                <input type="submit" style="display: none;">
+            </form>
+            <?php if (file_exists(__DIR__ . '/uploads/' . $userProfile)) : ?>
+                <form action="app/users/remove-avatar.php" method="POST" enctype="multipart/form-data">
+                    <!-- <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" style=" display: none;"> -->
+                    <input type="submit" class="unlink-pfp" value="Remove profile picture">
+                </form>
+            <?php endif; ?>
 
-            <button type="submit">Upload</button>
-        </form>
+        </div>
     </div>
 
     <?php if ($error !== '') : ?>
