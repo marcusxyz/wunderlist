@@ -7,7 +7,7 @@ require __DIR__ . '/general/notifications.php';
 <!-- Sign me in here -->
 <section class="signinout-container">
     <div class="image-container">
-        <img src="/assets/images/main-img-min.webp" alt="">
+        <img src="/assets/images/signin-bg.jpeg" alt="">
     </div>
 
     <article>

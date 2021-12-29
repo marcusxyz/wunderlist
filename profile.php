@@ -19,24 +19,23 @@ $userProfile = $_SESSION['user']['avatar'];
 <section class="profile">
     <a href="/">Go back</a>
     <div class="change-pfp">
-        <?= $userProfile; ?>
+        <!-- <?php print_r($_SESSION['user']); ?> -->
         <div class="profile-container">
-            <?php if (file_exists(__DIR__ . '/uploads/' . $userProfile)) : ?>
-                <img src="/uploads/<?= $userProfile; ?>" alt="default profile picture for the user">
+            <?php if (isset($userProfile)) : ?>
+                <img src="/uploads/<?= $userProfile; ?>" alt="user selected profile picture">
             <?php else : ?>
                 <img src="/uploads/default.jpeg" alt="Default profile picture">
             <?php endif; ?>
         </div>
         <div class="links">
             <form action="app/users/update-avatar.php" method="POST" enctype="multipart/form-data">
-                <label for="avatar" class="link-pfp">Change profile picture</label>
-                <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" style=" display: none;">
+                <a href=""><label for="avatar" class="link-pfp">Change profile picture</label></a>
+                <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png, .gif" style=" display: none;">
                 <input type="submit" style="display: none;">
             </form>
-            <?php if (file_exists(__DIR__ . '/uploads/' . $userProfile)) : ?>
+            <?php if (isset($userProfile)) : ?>
                 <form action="app/users/remove-avatar.php" method="POST" enctype="multipart/form-data">
-                    <!-- <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" style=" display: none;"> -->
-                    <input type="submit" class="unlink-pfp" value="Remove profile picture">
+                    <input type="submit" id="remove-avatar" name="remove-avatar" class="unlink-pfp" value="Remove profile picture">
                 </form>
             <?php endif; ?>
 

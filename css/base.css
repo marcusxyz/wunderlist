@@ -10,7 +10,7 @@
   /* Color */
   --white: #ffffff;
   --black: #1a1b1c;
-  --gray: #e5e5e5;
+  --gray: #d7d8dc;
   --form-gray: #ebecf0;
   --nav-gray: #f3f4f5;
   --overlay-gray: #f7f8f9;
@@ -18,7 +18,11 @@
   --red: #efaaab;
   --yellow: #e9e582;
   --blue: #6cb5df;
-  --purple: #c8aaef;
+  --soft-purple: #c8aaef;
+  --purple: #5865f2;
+  --purple-hover: #4752c4;
+  --success: #57f287;
+  --error: #ed4245;
 
   /* Font size */
   --base-size: 16px;
@@ -57,6 +61,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: var(--purple);
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -71,11 +79,13 @@ ul {
 }
 
 .error {
-  background-color: var(--red);
+  background-color: var(--error);
+  color: var(--white);
 }
 
 .success {
-  background-color: var(--purple);
+  background-color: var(--success);
+  color: var(--black);
 }
 
 input,
@@ -111,9 +121,13 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px var(--form-gray) inset;
 }
 
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 1px var(--purple-hover);
+}
+
 input:focus {
-  border: 1px solid var(--black);
-  box-shadow: 0 0 0 1px var(--black);
+  border: 1px solid var(--purple);
+  box-shadow: 0 0 0 1px var(--purple-hover);
 }
 
 label {
@@ -140,18 +154,19 @@ label {
 
 .btn.btn-full,
 .btn.btn-half {
-  background-color: var(--black);
+  background-color: var(--purple);
 }
 
 .btn.secondary-full {
   width: 100%;
   background-color: transparent;
-  border: 2px solid var(--black);
+  border: 2px solid var(--error);
+  color: var(--error);
 }
 
 .btn.btn-full {
   width: 100%;
-  background-color: var(--black);
+  background-color: var(--purple);
   color: var(--white);
 }
 
@@ -160,13 +175,15 @@ label {
   color: var(--white);
 }
 
-.btn.btn:hover {
-  background-color: #313233;
+.btn.btn:hover,
+label.link-pfp:hover {
+  background-color: var(--purple-hover);
 }
 
 .btn.secondary-full:hover {
-  background-color: var(--red);
-  border: 2px solid var(--red);
+  background-color: var(--error);
+  border: 2px solid var(--error);
+  color: var(--white);
 }
 
 small {

@@ -13,8 +13,8 @@ if (isset($_FILES['avatar'])) {
     $avatar = $_FILES['avatar'];
 
     //Only allow .png and .jpg files.
-    if (!in_array($avatar['type'], ['image/jpeg', 'image/pmg'])) {
-        $_SESSION['error'] = 'You can only upload .jpeg or .png files.';
+    if (!in_array($avatar['type'], ['image/jpeg', 'image/png', 'image/gif'])) {
+        $_SESSION['error'] = 'You can only upload .jpeg, .png or .giffiles.';
         redirect('/profile.php');
     }
 
@@ -24,7 +24,7 @@ if (isset($_FILES['avatar'])) {
         redirect('/profile.php');
     }
 
-    $userProfile = $id . '-' . date('ymd') . '-' . $avatar['name'];
+    $userProfile = 'userID-' . $id . '-' . date('ymd');
     $folderPath = __DIR__ . '/../../uploads/';
     $destination = $folderPath . $userProfile;
 

@@ -34,14 +34,27 @@ div.change-pfp {
   border-radius: 100%;
 }
 
-label.link-pfp,
 input.unlink-pfp {
   text-decoration: underline;
   cursor: pointer;
 }
 
 label.link-pfp {
-  margin-top: 1.5rem;
+  width: 100%;
+  margin: 2rem 0 1rem 0;
+  background-color: var(--purple);
+  color: var(--white);
+  font-size: var(--p);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  border: none;
+  display: inline-block;
+  padding: 1rem;
+}
+
+label.link-pfp:hover {
+  background-color: var(--purple-hover);
 }
 
 input.unlink-pfp {
