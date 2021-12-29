@@ -10,7 +10,6 @@ $userProfile = $_SESSION['user']['avatar'];
 // Image upload
 
 if (isset($_POST['remove-avatar'])) {
-
     $statement = $database->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
     $statement->bindParam(':avatar', $userProfile, PDO::PARAM_STR);
     $statement->bindParam(':id', $id, PDO::PARAM_INT);
