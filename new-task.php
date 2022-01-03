@@ -6,9 +6,6 @@ require __DIR__ . '/general/notifications.php';
 
 <!-- Sign me in here -->
 <section class="signinout-container">
-    <!-- <div class="image-container">
-        <img src="/assets/images/main-img-min.webp" alt="">
-    </div> -->
 
     <article>
         <div class="form-content">
@@ -17,10 +14,15 @@ require __DIR__ . '/general/notifications.php';
             <?php if ($error !== '') : ?>
                 <p class="error"><?= $error; ?></p>
             <?php endif; ?>
-            <form action="app/lists/store.php" method="post" required>
+
+            <?php if ($message !== '') : ?>
+                <p class="success"><?php echo $message; ?></p>
+            <?php endif; ?>
+
+            <form action="app/tasks/store.php" method="post" required>
                 <div class="form">
-                    <label for="title">Title</label>
-                    <input type="title" name="title" id="title" required>
+                    <label for="task_name">Title</label>
+                    <input type="task_name" name="task_name" id="task_name" required>
                 </div>
                 <div class="form">
                     <label for="due_date">Due date</label>

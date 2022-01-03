@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
-    $username = trim($_POST['name']); // FILTER_SANITIZE_STRING is deprecated.
+if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
+    $username = trim($_POST['username']); // FILTER_SANITIZE_STRING is deprecated.
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $passphrase = $_POST['password'];
     $confirmPassphrase = $_POST['password-confirm'];
@@ -43,8 +43,8 @@ if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-
     }
 
     // Check if username exists in database
-    $statement = $database->prepare('SELECT * FROM users WHERE name = :name');
-    $statement->bindParam(':name', $username, PDO::PARAM_STR);
+    $statement = $database->prepare('SELECT * FROM users WHERE username = :username');
+    $statement->bindParam(':username', $username, PDO::PARAM_STR);
     $statement->execute();
 
     $checkUsername = $statement->fetch(PDO::FETCH_ASSOC);
@@ -55,9 +55,9 @@ if (isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['password-
     }
 
     // Reg users to db and send them to sign in page.
-    $statement = $database->prepare('INSERT INTO users(name, email, password) VALUES(:name, :email, :password)');
+    $statement = $database->prepare('INSERT INTO users(username, email, password) VALUES(:username, :email, :password)');
 
-    $statement->bindParam(':name', $username, PDO::PARAM_STR);
+    $statement->bindParam(':username', $username, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':password', $password, PDO::PARAM_STR);
 

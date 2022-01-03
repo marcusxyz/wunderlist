@@ -19,8 +19,8 @@ require __DIR__ . '/general/notifications.php';
             <?php endif; ?>
             <form action="app/users/signup-process.php" method="post">
                 <div class="form">
-                    <label for="name">Username</label>
-                    <input type="name" name="name" id="name" placeholder="Enter your username" required>
+                    <label for="username">Username</label>
+                    <input type="username" name="username" id="username" placeholder="Enter your username" required>
                 </div>
                 <div class="form">
                     <label for="email">Email</label>

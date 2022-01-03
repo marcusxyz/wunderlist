@@ -26,6 +26,8 @@ if (isset($_POST['new-task'])) {
     </a>
 </div>
 <?php print_r($_SESSION['user']); ?>
+<br>
+<?php print_r($_SESSION['tasks']); ?>
 
 <section class="task-container">
     <div class="task-item empty">

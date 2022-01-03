@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-$id = $_SESSION['user']['id'];
-$username = $_SESSION['user']['name'];
-$email = $_SESSION['user']['email'];
+// If user is signed in, show session vairables
+if (isset($_SESSION['user'])) {
+    $id = $_SESSION['user']['id'];
+    $username = $_SESSION['user']['name'];
+    $email = $_SESSION['user']['email'];
+} else {
+    redirect('/signin.php');
+}
+
 
 // If fields are unchanged while saving, display error message.
 if ($username === $_POST['name'] && $email === $_POST['email'] && empty($_POST['password']) && empty($_POST['password-new']) && empty($_POST['password-confirm'])) {
