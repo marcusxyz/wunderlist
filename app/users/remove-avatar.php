@@ -24,7 +24,7 @@ if (isset($_POST['remove-avatar'])) {
 
     // Updating session variable
     $_SESSION['user']['avatar'] = $removeUserImage;
-    $_SESSION['error'] = 'Your profile picture has been removed';
+    // $_SESSION['error'] = 'Your profile picture has been removed';
     redirect('/profile.php');
 } else {
     echo 'We have a problem somewhere';

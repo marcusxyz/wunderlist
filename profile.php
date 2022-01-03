@@ -13,6 +13,8 @@ if (!isset($_SESSION['user'])) {
 
 $userProfile = $_SESSION['user']['avatar'];
 
+// SELF NOTE: Uncomment JS in order for profile change to work
+
 ?>
 
 <!-- Manage your account -->
@@ -74,8 +76,10 @@ $userProfile = $_SESSION['user']['avatar'];
             <input type="password" name="password-confirm" id="password-confirm">
         </div>
         <button type="submit" name="save-changes" class="btn btn-full">Save Changes</button>
-        <button type="submit" name="delete-user" class="btn secondary-full">Delete account</button>
     </form>
+    <a href="/delete.php" style="display: block;">
+        <button class="btn secondary-full">Delete account</button>
+    </a>
 
 </section>
 
