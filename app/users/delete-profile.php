@@ -13,6 +13,7 @@ $email = $_SESSION['user']['email'];
 if (isset($_POST['delete'])) {
     $deleteConfirm = $_POST['delete'];
 
+    // If field is empty throw out an error
     if ($deleteConfirm === '') {
         $_SESSION['error'] = "Make sure to enter 'DELETE' and your password to confirm";
         redirect('/delete.php');
@@ -30,9 +31,14 @@ if (isset($_POST['delete'])) {
         $password = $_POST['password'];
 
         if (password_verify($password, $user['password'])) {
-            $_SESSION['message'] = 'WOOH, it works!';
+            $statement = $database->prepare('DELETE FROM users WHERE id = :id');
+            $statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $statement->execute();
 
-            redirect('/delete.php');
+            $_SESSION['message'] = 'Your account has been deleted';
+
+            session_destroy();
+            redirect('/');
         } else {
             $_SESSION['error'] = 'Your password has been entered incorrectly.';
         }
