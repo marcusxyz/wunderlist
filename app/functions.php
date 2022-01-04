@@ -23,7 +23,6 @@ function fetchTasks($database): array
 
 function editTasks($database): array
 {
-    // I get error when this function is in /functions.php. Dropping it here for now..
     $taskID = $_SESSION['taskID'];
     $statement = $database->prepare('SELECT * FROM tasks WHERE id = :id');
     $statement->bindParam(':id', $taskID, PDO::PARAM_INT);

@@ -38,8 +38,4 @@ if ($taskName === $_POST['task_name'] && $dueDate == $_POST['due_date'] && $task
 
 // print_r($_SESSION['task']['id']);
 
-
-
-$taskName = $_POST['task_name'];
-
 // redirect("/edit-task.php?id=$id");
