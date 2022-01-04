@@ -3,18 +3,10 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/general/header.php';
 require __DIR__ . '/general/notifications.php';
 
-function editTasks($database)
-{
-    $taskID = $_GET['id'];
+// I'm storing id from url in a session variable so I can use it in a function elsewhere
+$_SESSION['taskID'] = $_GET['id'];
 
-    $statement = $database->prepare('SELECT * FROM tasks WHERE id = :id');
-    $statement->bindParam(':id', $taskID, PDO::PARAM_INT);
-    $statement->execute();
-
-    $getTask = $statement->fetch(PDO::FETCH_ASSOC);
-    return $getTask;
-}
-// Saving function to a new variable
+// Saving function to a new shorter variable
 $editTask = editTasks($database);
 ?>
 <!-- Edit user submitted tasks here -->
@@ -33,7 +25,8 @@ $editTask = editTasks($database);
             <?php endif; ?>
 
 
-            <form action="app/tasks/store.php" method="post" required>
+            <?php print_r($_SESSION['task']); ?>
+            <form action="app/users/update-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
                     <input type="task_name" name="task_name" id="task_name" value="<?= $editTask['task_name']; ?>" required>
@@ -46,7 +39,7 @@ $editTask = editTasks($database);
                     <label for="task_notes">Note</label>
                     <textarea type="text" name="task_notes" id="task_notes"><?= $editTask['task_notes']; ?></textarea optional>
                     </div>
-
+                    <input type="hidden" name="id" id="<?= $task['id']; ?>">
                     <button type="submit" name="submit-task" class="btn btn-full">Save changes</button>
                     <button type="submit" name="submit-task" class="btn secondary-full done">Mark as done</button>
                 </form>
