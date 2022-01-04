@@ -29,7 +29,7 @@ if (!isset($_SESSION['user'])) {
         <p class="success"><?php echo $message; ?></p>
     <?php endif; ?>
 
-    <form action="app/users/delete-profile.php" method="post" class="account-settings">
+    <form action="app/users/update-task.php" method="post" class="account-settings">
         <div class="form">
             <label for="delete">Type DELETE to confirm</label>
             <input type="delete" name="delete" id="delete">

@@ -7,7 +7,7 @@ require __DIR__ . '/../autoload.php';
 // If user is signed in, show session vairables
 if (isset($_SESSION['user'])) {
     $id = $_SESSION['user']['id'];
-    $username = $_SESSION['user']['name'];
+    $username = $_SESSION['user']['username'];
     $email = $_SESSION['user']['email'];
 } else {
     redirect('/signin.php');
@@ -15,20 +15,20 @@ if (isset($_SESSION['user'])) {
 
 
 // If fields are unchanged while saving, display error message.
-if ($username === $_POST['name'] && $email === $_POST['email'] && empty($_POST['password']) && empty($_POST['password-new']) && empty($_POST['password-confirm'])) {
+if ($username === $_POST['username'] && $email === $_POST['email'] && empty($_POST['password']) && empty($_POST['password-new']) && empty($_POST['password-confirm'])) {
     $_SESSION['error'] = 'No changes has been made';
     redirect('/profile.php');
 }
 
 // Check if the user has entered a different username
-if ($username !== $_POST['name']) {
+if ($username !== $_POST['username']) {
     // Change username
-    if (isset($_POST['name'])) {
-        $username = trim($_POST['name']); // FILTER_SANITIZE_STRING is deprecated.
+    if (isset($_POST['username'])) {
+        $username = trim($_POST['username']); // FILTER_SANITIZE_STRING is deprecated.
 
         // Check if username exists in database
-        $statement = $database->prepare('SELECT * FROM users WHERE name = :name');
-        $statement->bindParam(':name', $username, PDO::PARAM_STR);
+        $statement = $database->prepare('SELECT * FROM users WHERE username = :username');
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
         $statement->execute();
 
         $checkUsername = $statement->fetch(PDO::FETCH_ASSOC);
@@ -44,13 +44,13 @@ if ($username !== $_POST['name']) {
             redirect('/profile.php');
         }
         // If everything checks out update value
-        $statement = $database->prepare('UPDATE users SET name = :name WHERE id = :id');
-        $statement->bindParam(':name', $username, PDO::PARAM_STR);
+        $statement = $database->prepare('UPDATE users SET username = :username WHERE id = :id');
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
         // Updating session variable
-        $_SESSION['user']['name'] = $username;
+        $_SESSION['user']['username'] = $username;
         $_SESSION['message'] = 'Your username has been updated';
         redirect('/profile.php');
     }
@@ -85,7 +85,7 @@ if ($email !== $_POST['email']) {
     }
 }
 
-if ($username === $_POST['name'] && $email === $_POST['email'] && !empty($_POST['password'])) {
+if ($username === $_POST['username'] && $email === $_POST['email'] && !empty($_POST['password'])) {
     // Change password
     if (isset($_POST['password'])) {
         $password = $_POST['password'];
@@ -134,5 +134,8 @@ if ($username === $_POST['name'] && $email === $_POST['email'] && !empty($_POST[
             $_SESSION['error'] = 'Your old password has been entered incorrectly.';
             redirect('/profile.php');
         }
+        redirect('/profile.php');
     }
+    redirect('/profile.php');
 }
+redirect('/profile.php');

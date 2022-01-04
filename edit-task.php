@@ -48,6 +48,7 @@ $editTask = editTasks($database);
                     </div>
 
                     <button type="submit" name="submit-task" class="btn btn-full">Save changes</button>
+                    <button type="submit" name="submit-task" class="btn secondary-full done">Mark as done</button>
                 </form>
         </div>
     </article>
