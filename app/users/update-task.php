@@ -13,15 +13,9 @@ if (isset($_SESSION['user'])) {
     $_POST['task_name'] = $_SESSION['task']['task_name'];
     $_POST['due_date'] = $_SESSION['task']['due_date'];
     $_POST['task_notes'] = $_SESSION['task']['task_notes'];
-
-    // echo $_POST['task_name'];
-    // echo $_POST['due_date'];
-    // echo $_POST['task_notes'];
-
 } else {
     redirect('/signin.php');
 }
-
 
 // If fields are unchanged while saving, display error message.
 if ($taskName === $_POST['task_name'] && $dueDate == $_POST['due_date'] && $taskNotes === $_POST['task_notes']) {
@@ -36,6 +30,4 @@ if ($taskName === $_POST['task_name'] && $dueDate == $_POST['due_date'] && $task
     redirect("/edit-task.php?id=$id.php");
 }
 
-// print_r($_SESSION['task']['id']);
-
-// redirect("/edit-task.php?id=$id");
+redirect("/edit-task.php?id=$id");
