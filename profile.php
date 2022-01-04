@@ -55,7 +55,7 @@ $userProfile = $_SESSION['user']['avatar'];
     <form action="app/users/update-profile.php" method="post" class="account-settings">
         <div class="form">
             <label for="name">Username</label>
-            <input type="name" name="name" id="name" value="<?= $_SESSION['user']['name']; ?>">
+            <input type="name" name="name" id="name" value="<?= $_SESSION['user']['username']; ?>">
         </div>
         <div class="form">
             <label for="email">Email</label>

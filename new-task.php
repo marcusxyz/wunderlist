@@ -26,7 +26,7 @@ require __DIR__ . '/general/notifications.php';
                 </div>
                 <div class="form">
                     <label for="due_date">Due date</label>
-                    <input type="date" name="due_date" id="due_date" required>
+                    <input type="datetime" name="due_date" id="due_date" placeholder="Please select a due date" required>
                 </div>
                 <div class="form">
                     <label for="task_notes">Note</label>
@@ -39,3 +39,7 @@ require __DIR__ . '/general/notifications.php';
     </article>
 
 </section>
+
+<?php
+require __DIR__ . '/general/footer.php';
+?>

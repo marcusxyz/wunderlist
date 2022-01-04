@@ -1,0 +1,44 @@
+.welcome-content {
+  margin-top: 7.75rem;
+  margin-bottom: 4rem;
+  padding: 0 1rem;
+}
+
+.task-container {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.task-item {
+  width: 100%;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--gray);
+  background-color: var(--overlay-gray);
+  border-radius: 0.25rem;
+}
+
+.task-item:hover {
+  color: var(--black);
+}
+
+.task-item.empty {
+  border: 1px solid var(--gray);
+  background-color: transparent;
+  text-align: center;
+  padding: 2.5rem;
+}
+
+.due-date {
+  display: flex;
+  align-items: center;
+}
+
+.due-date p {
+  margin-left: 0.5rem;
+}
+
+.completed {
+  margin-bottom: 4rem;
+  padding: 0 1rem;
+}

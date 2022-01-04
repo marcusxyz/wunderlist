@@ -28,13 +28,13 @@ if (isset($_POST['email'], $_POST['password'])) {
     if (password_verify($password, $user['password'])) {
         $_SESSION['user'] = [
             'id' => $user['id'],
-            'name' => $user['name'],
+            'username' => $user['username'],
             'email' => $user['email'],
             'avatar' => $user['avatar'],
         ];
         // unset($user['password']); This also hides other session values on refresh..
 
-        $_SESSION['message'] = 'Welcome back ' . $user['name'] . '!';
+        $_SESSION['message'] = 'Welcome back ' . $user['username'] . '!';
         redirect('/');
     } else {
         $_SESSION['error'] = 'The provided credentials does not match our records.';
