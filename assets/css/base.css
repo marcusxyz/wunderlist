@@ -101,6 +101,7 @@ textarea {
 }
 
 textarea {
+  height: 12rem;
   resize: vertical;
 }
 
