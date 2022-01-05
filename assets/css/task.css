@@ -1,0 +1,46 @@
+.subtask-container {
+  margin-bottom: 2rem;
+}
+
+.subtask-item {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0 0.5rem 0;
+}
+
+input[type='checkbox'] {
+  width: auto;
+  display: inline-block;
+}
+
+.subtask-item p {
+  margin: 0 0 0 0.5rem;
+}
+
+.form .btn.btn-auto {
+  width: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--white);
+  background-color: var(--purple);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container .btn.btn-half {
+  width: calc(50% - 0.25rem);
+}
+
+.btn.btn-half.delete {
+  background-color: #f9f0ef;
+  color: var(--error);
+  /* border: 2px solid var(--error); */
+}
+
+.btn.btn-half.delete:hover {
+  color: var(--white);
+  background-color: var(--error);
+}

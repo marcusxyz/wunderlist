@@ -25,7 +25,7 @@ $editTask = editTasks($database);
             <?php endif; ?>
 
 
-            <?php print_r($_SESSION['task']); ?>
+            <!-- <?php print_r($_SESSION['task']); ?> -->
             <form action="app/users/update-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
@@ -40,17 +40,25 @@ $editTask = editTasks($database);
                     <textarea type="text" name="task_notes" id="task_notes"><?= $editTask['task_notes']; ?></textarea>
                 </div>
                 <div class="form">
-                    <label for="task_name">Add subtasks</label>
-                    <input type="text" name="subtask_name" id="subtask_name">
+                    <label for="task_name">Make a checklist</label>
+                    <input type="text" name="subtask_name" id="subtask_name" placeholder="Write something and press 'Enter'">
                     <input type="hidden" name="id" id="<?= $task['id']; ?>">
-                    <button type="submit" name="submit-subtask" class="btn btn-half">Add</button>
+                    <button type="submit" name="submit-subtask" class="btn btn-auto">Add</button>
                 </div>
-                <?php foreach (fetchSubTasks($database) as $subTask) : ?>
-                    <p><?= $subTask['subtask_name']; ?></p>
-                <?php endforeach; ?>
+                <div class="subtask-container">
+                    <?php foreach (fetchSubTasks($database) as $subTask) : ?>
+                        <div class="subtask-item">
+                            <input type="checkbox" name="status" id="status">
+                            <!-- place hidden submit here? -->
+                            <p><?= $subTask['subtask_name']; ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
                 <input type="hidden" name="id" id="<?= $task['id']; ?>">
-                <button type="submit" name="submit-task" class="btn btn-full">Save changes</button>
-                <button type="submit" name="submit-task" class="btn secondary-full done">Mark as done</button>
+                <div class="button-container">
+                    <button type="submit" name="submit-task" class="btn btn-half">Save changes</button>
+                    <button type="submit" name="submit-task" class="btn btn-half delete">Delete task</button>
+                </div>
             </form>
         </div>
         <div class="form-content">

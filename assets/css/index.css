@@ -1,7 +1,16 @@
+main {
+  /* background-color: #f3f3f3; */
+}
+
 .welcome-content {
-  margin-top: 7.75rem;
-  margin-bottom: 4rem;
-  padding: 0 1rem;
+  padding-top: 7.75rem;
+  padding-bottom: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.welcome-content p {
+  margin-bottom: 2rem;
 }
 
 .task-container {
@@ -11,15 +20,24 @@
 
 .task-item {
   width: 100%;
+  height: 200px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid var(--gray);
-  background-color: var(--overlay-gray);
+  background-color: var(--nav-gray);
   border-radius: 0.25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .task-item:hover {
   color: var(--black);
+}
+
+.task-item h3 {
+  margin-bottom: 1rem;
 }
 
 .task-item.empty {
@@ -40,5 +58,4 @@
 
 .completed {
   margin-bottom: 4rem;
-  padding: 0 1rem;
 }

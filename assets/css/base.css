@@ -52,8 +52,20 @@ body {
   background-color: var(--white);
 }
 
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
 h1 {
   font-size: var(--h2);
+}
+
+h2 {
+  font-size: var(--h3);
+  margin-bottom: 1.5rem;
 }
 
 a {
@@ -145,7 +157,8 @@ label {
 
 .btn.btn-full,
 .btn.secondary-full,
-.btn.btn-half {
+.btn.btn-half,
+.btn.btn-auto {
   font-size: var(--p);
   border-radius: 0.25rem;
   margin-top: 1rem;
@@ -196,6 +209,15 @@ label.link-pfp:hover {
   background-color: var(--error);
   border: 2px solid var(--error);
   color: var(--white);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container .btn.btn-half {
+  width: calc(50% - 0.25rem);
 }
 
 small {

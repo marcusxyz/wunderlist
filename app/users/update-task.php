@@ -50,4 +50,23 @@ if (isset($_POST['subtask_name'])) {
     $_SESSION['message'] = 'Subtask added.';
     redirect("/edit-task.php?id=$id");
 }
+
+// Checkbox
+
+if (isset($_POST['status'])) {
+    $_SESSION['message'] = 'checked';
+} else {
+    $_SESSION['message'] = 'unchecked';
+};
+
+$status = $_POST['status'];
+if ($status == 1) {
+    $status = 1;
+    $_SESSION['message'] = 'Checked!';
+    redirect("/edit-task.php?id=$id");
+} else {
+    $status = 0;
+    $_SESSION['error'] = 'Unchecked';
+    redirect("/edit-task.php?id=$id");
+}
 redirect("/edit-task.php?id=$id");
