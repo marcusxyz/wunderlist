@@ -1,7 +1,15 @@
-// document.getElementById('avatar').onchange = function () {
-//   this.form.submit();
-// };
+const checkboxes = document.querySelectorAll('input[type=checkbox]');
 
-// document.getElementById('remove-avatar').onchange = function () {
-//   this.form.submit();
-// };
+checkboxes.forEach((checkbox) => {
+  checkbox.onclick = function () {
+    this.parentNode.submit();
+  };
+});
+
+document.getElementById('avatar').onchange = function () {
+  this.form.submit();
+};
+
+document.getElementById('remove-avatar').onchange = function () {
+  this.form.submit();
+};

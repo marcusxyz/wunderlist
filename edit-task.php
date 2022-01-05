@@ -48,8 +48,10 @@ $editTask = editTasks($database);
                 <div class="subtask-container">
                     <?php foreach (fetchSubTasks($database) as $subTask) : ?>
                         <div class="subtask-item">
-                            <input type="checkbox" name="status" id="status">
-                            <!-- place hidden submit here? -->
+                            <form action="app/users/update-status.php" method="post">
+                                <input type="hidden" name="subtask-status" value="<?= $subTask['subtask_name']; ?>" id="<?= $subTask['id']; ?>">
+                                <input type="checkbox" <?= $subTask['status'] ? 'checked' : ''; ?>>
+                            </form>
                             <p><?= $subTask['subtask_name']; ?></p>
                         </div>
                     <?php endforeach; ?>
@@ -59,11 +61,6 @@ $editTask = editTasks($database);
                     <button type="submit" name="submit-task" class="btn btn-half">Save changes</button>
                     <button type="submit" name="submit-task" class="btn btn-half delete">Delete task</button>
                 </div>
-            </form>
-        </div>
-        <div class="form-content">
-            <!-- <h3>Add subtasks</h3> -->
-            <form action="app/users/create-subtask.php" method="post">
             </form>
         </div>
     </article>
