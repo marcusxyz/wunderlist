@@ -21,6 +21,18 @@ function fetchTasks($database): array
     return $getTasks;
 }
 
+function fetchSubTasks($database): array
+{
+    $taskID = $_SESSION['task']['id'];
+
+    $statement = $database->prepare('SELECT * FROM lists WHERE task_id = :task_id');
+    $statement->bindParam(':task_id', $taskID, PDO::PARAM_INT);
+    $statement->execute();
+
+    $getSubTasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $getSubTasks;
+}
+
 function editTasks($database): array
 {
     $taskID = $_SESSION['taskID'];

@@ -29,7 +29,7 @@ $editTask = editTasks($database);
             <form action="app/users/update-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
-                    <input type="task_name" name="task_name" id="task_name" value="<?= $editTask['task_name']; ?>" required>
+                    <input type="text" name="task_name" id="task_name" value="<?= $editTask['task_name']; ?>" required>
                 </div>
                 <div class="form">
                     <label for="due_date">Due date</label>
@@ -37,12 +37,26 @@ $editTask = editTasks($database);
                 </div>
                 <div class="form">
                     <label for="task_notes">Note</label>
-                    <textarea type="text" name="task_notes" id="task_notes"><?= $editTask['task_notes']; ?></textarea optional>
-                    </div>
+                    <textarea type="text" name="task_notes" id="task_notes"><?= $editTask['task_notes']; ?></textarea>
+                </div>
+                <div class="form">
+                    <label for="task_name">Add subtasks</label>
+                    <input type="text" name="subtask_name" id="subtask_name">
                     <input type="hidden" name="id" id="<?= $task['id']; ?>">
-                    <button type="submit" name="submit-task" class="btn btn-full">Save changes</button>
-                    <button type="submit" name="submit-task" class="btn secondary-full done">Mark as done</button>
-                </form>
+                    <button type="submit" name="submit-subtask" class="btn btn-half">Add</button>
+                </div>
+                <?php foreach (fetchSubTasks($database) as $subTask) : ?>
+                    <p><?= $subTask['subtask_name']; ?></p>
+                <?php endforeach; ?>
+                <input type="hidden" name="id" id="<?= $task['id']; ?>">
+                <button type="submit" name="submit-task" class="btn btn-full">Save changes</button>
+                <button type="submit" name="submit-task" class="btn secondary-full done">Mark as done</button>
+            </form>
+        </div>
+        <div class="form-content">
+            <!-- <h3>Add subtasks</h3> -->
+            <form action="app/users/create-subtask.php" method="post">
+            </form>
         </div>
     </article>
 

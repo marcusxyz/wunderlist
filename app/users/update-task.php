@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
     redirect('/signin.php');
 }
 
-if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
+if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'], $_POST['subtask_name'])) {
     $id = $_SESSION['task']['id'];
     $taskName = trim($_POST['task_name']);
     $dueDate = trim($_POST['due_date']);
@@ -19,7 +19,7 @@ if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
     $_POST['task_notes'] = $_SESSION['task']['task_notes'];
 
     // If fields are unchanged while saving, display error message.
-    if ($taskName === $_POST['task_name'] && $dueDate === $_POST['due_date'] && $taskNotes === $_POST['task_notes']) {
+    if ($taskName === $_POST['task_name'] && $dueDate === $_POST['due_date'] && $taskNotes === $_POST['task_notes'] && $_POST['subtask_name'] === '') {
         $_SESSION['error'] = 'No changes has been made';
         // echo 'No changes has been made';
         redirect("/edit-task.php?id=$id.php");
@@ -37,5 +37,17 @@ if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
         $_SESSION['message'] = 'Your task has been updated';
         redirect("/edit-task.php?id=$id");
     }
+}
+
+//If users adds subtasks
+if (isset($_POST['subtask_name'])) {
+    $subtaskName = trim($_POST['subtask_name']);
+    $statement = $database->prepare('INSERT INTO lists (task_id, subtask_name) VALUES(:task_id, :subtask_name)');
+    $statement->bindParam(':task_id', $id, PDO::PARAM_INT);
+    $statement->bindParam(':subtask_name', $subtaskName, PDO::PARAM_STR);
+    $statement->execute();
+
+    $_SESSION['message'] = 'Subtask added.';
+    redirect("/edit-task.php?id=$id");
 }
 redirect("/edit-task.php?id=$id");

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../assets/css/signinandout.css">
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../assets/css/task.css">
     <!-- flatpickr for human-friendly dates -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title><?= $config['title']; ?></title>
