@@ -40,33 +40,39 @@ if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'], $_POST[
 }
 
 //If users adds subtasks
-if (isset($_POST['subtask_name'])) {
+if (isset($_POST['subtask_name'], $_POST['status'])) {
+    // $statement = $database->prepare('SELECT id FROM lists WHERE task_id = :task_id');
+    // $statement->bindParam(':task_id', $id, PDO::PARAM_INT);
+    // // $statement->bindParam(':task_id', $id, PDO::PARAM_INT);
+    // $statement->execute();
+
+    // $list = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // print_r($list);
+
     $subtaskName = trim($_POST['subtask_name']);
-    $statement = $database->prepare('INSERT INTO lists (task_id, subtask_name) VALUES(:task_id, :subtask_name)');
+    $status = trim($_POST['status']);
+    $statement = $database->prepare('INSERT INTO lists (task_id, subtask_name, status) VALUES(:task_id, :subtask_name, :status)');
     $statement->bindParam(':task_id', $id, PDO::PARAM_INT);
     $statement->bindParam(':subtask_name', $subtaskName, PDO::PARAM_STR);
+    $statement->bindParam(':status', $status, PDO::PARAM_INT);
     $statement->execute();
 
-    $_SESSION['message'] = 'Subtask added.';
+    // $statement = $database->query('SELECT * FROM lists WHERE task_id = :task_id');
+    // $statement->bindParam(':task_id', $taskID, PDO::PARAM_INT);
+    // $statement->execute();
+
+    // $getSubTasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // foreach (fetchSubTasks($database) as $subTask) {
+    //     $_SESSION['subtask'] = [
+    //         'id' => $subTask['id'],
+    //         'subtask_name' => $subTask['subtask_name'],
+    //         'status' => $subTask['status'],
+    //     ];
+    // }
+
     redirect("/edit-task.php?id=$id");
 }
 
-// Checkbox
-
-// if (isset($_POST['status'])) {
-//     $_SESSION['message'] = 'checked';
-// } else {
-//     $_SESSION['message'] = 'unchecked';
-// };
-
-// $status = $_POST['status'];
-// if ($status == 1) {
-//     $status = 1;
-//     $_SESSION['message'] = 'Checked!';
-//     redirect("/edit-task.php?id=$id");
-// } else {
-//     $status = 0;
-//     $_SESSION['error'] = 'Unchecked';
-//     redirect("/edit-task.php?id=$id");
-// }
 redirect("/edit-task.php?id=$id");

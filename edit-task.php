@@ -8,7 +8,18 @@ $_SESSION['taskID'] = $_GET['id'];
 
 // Saving function to a new shorter variable
 $editTask = editTasks($database);
+
+// foreach (fetchSubTasks($database) as $subTask) {
+//     $_SESSION['subtask'] = [
+//         'id' => $subTask['id'],
+//         'subtask_name' => $subTask['subtask_name'],
+//         'status' => $subTask['status'],
+//     ];
+// }
+
 ?>
+
+
 <!-- Edit user submitted tasks here -->
 <section class="edit-task-container">
 
@@ -25,7 +36,8 @@ $editTask = editTasks($database);
             <?php endif; ?>
 
 
-            <!-- <?php print_r($_SESSION['task']); ?> -->
+            <!-- <?php print_r($_SESSION['task']); ?>
+            <?php print_r($_SESSION['subtask']); ?> -->
             <form action="app/users/update-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
@@ -43,18 +55,8 @@ $editTask = editTasks($database);
                     <label for="task_name">Make a checklist</label>
                     <input type="text" name="subtask_name" id="subtask_name" placeholder="Write something and press 'Enter'">
                     <input type="hidden" name="id" id="<?= $task['id']; ?>">
+                    <input type="hidden" name="status" value="0">
                     <button type="submit" name="submit-subtask" class="btn btn-auto">Add</button>
-                </div>
-                <div class="subtask-container">
-                    <?php foreach (fetchSubTasks($database) as $subTask) : ?>
-                        <div class="subtask-item">
-                            <form action="app/users/update-status.php" method="post">
-                                <input type="hidden" name="subtask-status" value="<?= $subTask['subtask_name']; ?>" id="<?= $subTask['id']; ?>">
-                                <input type="checkbox" <?= $subTask['status'] ? 'checked' : ''; ?>>
-                            </form>
-                            <p><?= $subTask['subtask_name']; ?></p>
-                        </div>
-                    <?php endforeach; ?>
                 </div>
                 <input type="hidden" name="id" id="<?= $task['id']; ?>">
                 <div class="button-container">
@@ -62,6 +64,22 @@ $editTask = editTasks($database);
                     <button type="submit" name="submit-task" class="btn btn-half delete">Delete task</button>
                 </div>
             </form>
+            <div class="subtask-container">
+                <form action="app/users/update-task.php" method="post">
+                </form>
+                <?php foreach (fetchSubTasks($database) as $subTask) : ?>
+                    <div class="subtask-item">
+                        <form action="app/users/update-status.php" method="post">
+                            <input type="hidden" name="id" id="<?= $task['id']; ?>">
+                            <input type="hidden" name="subtask-id" value="<?= $subTask['id']; ?>">
+                            <input type="hidden" name="subtask-name" value="<?= $subTask['subtask_name']; ?>">
+                            <input type="hidden" name="subtask-status" value="<?= $subTask['status']; ?>">
+                            <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" value="<?= $subTask['status']; ?>" <?php if ($subTask['status'] == 1) echo 'checked="checked"'; ?> />
+                        </form>
+                        <p><?= $subTask['subtask_name']; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </article>
 
