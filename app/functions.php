@@ -51,33 +51,3 @@ function fetchSubTasks($database): array
 
     return $getSubTasks;
 }
-
-// function fetchSubTask($database): array
-// {
-//     $taskID = $_SESSION['task']['id'];
-
-//     $statement = $database->query('SELECT * FROM lists WHERE task_id = :task_id');
-//     $statement->bindParam(':task_id', $taskID, PDO::PARAM_INT);
-//     $statement->execute();
-
-//     $getSubTask = $statement->fetchAll(PDO::FETCH_ASSOC);
-//     return $getSubTask;
-// }
-
-// function editSubTasks($database): array
-// {
-//     $taskID = $_SESSION['taskID'];
-
-//     $statement = $database->prepare('SELECT * FROM lists WHERE task_id = :task_id');
-//     $statement->bindParam(':id', $taskID, PDO::PARAM_INT);
-//     $statement->execute();
-
-//     $getSubTask = $statement->fetch(PDO::FETCH_ASSOC);
-
-//     $_SESSION['list'] = [
-//         'id' => $getSubTask['id'],
-//         'subtask_name' => $getSubTask['subtask_name'],
-//         'status' => $getSubTask['status'],
-//     ];
-//     return $getSubTask;
-// }

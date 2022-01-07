@@ -19,7 +19,7 @@ require __DIR__ . '/general/notifications.php';
                 <p class="success"><?php echo $message; ?></p>
             <?php endif; ?>
 
-            <form action="app/tasks/store.php" method="post" required>
+            <form action="app/tasks/create/create-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
                     <input type="task_name" name="task_name" id="task_name" required>

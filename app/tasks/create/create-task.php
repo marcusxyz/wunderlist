@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__ . '/../../autoload.php';
 
 // When submitting, store values tasks tables
 if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
