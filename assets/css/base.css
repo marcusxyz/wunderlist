@@ -103,6 +103,7 @@ ul {
 input,
 textarea {
   width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--form-gray);
   color: var(--black);
   border: 1px solid var(--gray);

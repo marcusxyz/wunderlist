@@ -16,7 +16,8 @@ $editTask = editTasks($database);
 
     <article>
         <div class="form-content">
-            <h1>Edit task</h1>
+            <h1><?= $editTask['task_name']; ?></h1>
+            <p>In here you can edit your task, add checklist, update it and delete your task.</p>
 
             <?php if ($error !== '') : ?>
                 <p class="error"><?= $error; ?></p>
@@ -26,9 +27,9 @@ $editTask = editTasks($database);
                 <p class="success"><?php echo $message; ?></p>
             <?php endif; ?>
 
-            <?php print_r($_SESSION['task']); ?>
-            <?php print_r($_SESSION['subtask']); ?>
-            <form action="app/tasks//update/update-task.php" method="post" required>
+            <!-- <?php print_r($_SESSION['task']); ?>
+            <?php print_r($_SESSION['subtask']); ?> -->
+            <form action="app/tasks/update/update-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
                     <input type="text" name="task_name" id="task_name" value="<?= $editTask['task_name']; ?>" required>
@@ -61,18 +62,33 @@ $editTask = editTasks($database);
                 </form>
                 <?php foreach (fetchSubTasks($database) as $subTask) : ?>
                     <div class="subtask-item">
-                        <form action="app/subtasks/update/update-subtask-status.php" method="post">
+                        <form action="app/subtasks/update/update-subtask-status.php" method="post" class="subtask">
                             <input type="hidden" name="id" id="<?= $task['id']; ?>">
                             <input type="hidden" name="subtask-id" value="<?= $subTask['id']; ?>">
                             <input type="hidden" name="subtask-name" value="<?= $subTask['subtask_name']; ?>">
                             <input type="hidden" name="subtask-status" value="<?= $subTask['status']; ?>">
                             <?php if ($subTask['status'] == 1) : ?>
+
                                 <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" <?= 'checked="checked"' ?> />
+                                <p class="checked"><?= $subTask['subtask_name']; ?></p>
+
+                                <?= $subTask['id']; ?>
+                                <div>
+                                    <a class="edit" href="/edit-subtask.php?id=<?= $subTask['id']; ?>&name=<?= $subTask['subtask_name']; ?>">Edit</a>
+                                    <a class="delete" href="#">Delete</a>
+                                </div>
                             <?php else : ?>
+
                                 <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" />
+                                <p><?= $subTask['subtask_name']; ?></p>
+
+                                <?= $subTask['id']; ?>
+                                <div>
+                                    <a href="/edit-subtask.php?id=<?= $subTask['id']; ?>&name=<?= $subTask['subtask_name']; ?>" class="edit">Edit</a>
+                                    <a class="delete" href="#">Delete</a>
+                                </div>
                             <?php endif; ?>
                         </form>
-                        <p><?= $subTask['subtask_name']; ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

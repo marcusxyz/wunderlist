@@ -1,3 +1,15 @@
+.edit-task-container {
+  margin-top: 4rem;
+}
+
+.form-content h1 {
+  margin-bottom: 1rem;
+}
+
+.form-content p {
+  margin-bottom: 1.5rem;
+}
+
 .subtask-container {
   margin-bottom: 2rem;
 }
@@ -10,11 +22,47 @@
 
 input[type='checkbox'] {
   width: auto;
+  background: var(--form-gray);
   display: inline-block;
 }
 
 .subtask-item p {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
   margin: 0 0 0 0.5rem;
+}
+
+.subtask-item p.checked {
+  text-decoration: line-through;
+}
+
+form.subtask {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+form.subtask div {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+form.subtask div a {
+  margin-left: 1rem;
+}
+
+form.subtask .edit {
+  color: var(--purple);
+}
+
+form.subtask .delete {
+  color: var(--error);
+}
+form.subtask .edit:hover,
+form.subtask .delete:hover {
+  text-decoration: underline;
 }
 
 .form .btn.btn-auto {
