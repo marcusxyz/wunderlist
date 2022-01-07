@@ -68,24 +68,22 @@ $editTask = editTasks($database);
                             <input type="hidden" name="subtask-name" value="<?= $subTask['subtask_name']; ?>">
                             <input type="hidden" name="subtask-status" value="<?= $subTask['status']; ?>">
                             <?php if ($subTask['status'] == 1) : ?>
-
                                 <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" <?= 'checked="checked"' ?> />
                                 <p class="checked"><?= $subTask['subtask_name']; ?></p>
 
                                 <?= $subTask['id']; ?>
                                 <div>
                                     <a class="edit" href="/edit-subtask.php?id=<?= $subTask['id']; ?>&name=<?= $subTask['subtask_name']; ?>">Edit</a>
-                                    <a class="delete" href="#">Delete</a>
+                                    <a class="delete" href="/app/subtasks/delete/delete-subtask.php?id=<?= $subTask['id']; ?>&name=<?= $subTask['subtask_name']; ?>">Delete</a>
                                 </div>
                             <?php else : ?>
-
                                 <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" />
                                 <p><?= $subTask['subtask_name']; ?></p>
 
                                 <?= $subTask['id']; ?>
                                 <div>
                                     <a href="/edit-subtask.php?id=<?= $subTask['id']; ?>&name=<?= $subTask['subtask_name']; ?>" class="edit">Edit</a>
-                                    <a class="delete" href="#">Delete</a>
+                                    <a class="delete" href="/app/subtasks/delete/delete-subtask.php?id=<?= $subTask['id']; ?>&name=<?= $subTask['subtask_name']; ?>">Delete</a>
                                 </div>
                             <?php endif; ?>
                         </form>
