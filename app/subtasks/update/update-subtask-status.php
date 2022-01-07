@@ -21,9 +21,7 @@ $id = $_SESSION['task']['id'];
 
 print_r($_SESSION['task']);
 
-
 if (isset($_POST['subtask-id'], $_POST['subtask-name'], $_POST['subtask-status'])) {
-
     $subTaskID = $_POST['subtask-id'];
     $taskID = $_POST['id'];
     $subTaskName = $_POST['subtask-name'];

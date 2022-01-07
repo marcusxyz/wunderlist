@@ -9,16 +9,7 @@ $_SESSION['taskID'] = $_GET['id'];
 // Saving function to a new shorter variable
 $editTask = editTasks($database);
 
-// foreach (fetchSubTasks($database) as $subTask) {
-//     $_SESSION['subtask'] = [
-//         'id' => $subTask['id'],
-//         'subtask_name' => $subTask['subtask_name'],
-//         'status' => $subTask['status'],
-//     ];
-// }
-
 ?>
-
 
 <!-- Edit user submitted tasks here -->
 <section class="edit-task-container">
@@ -34,7 +25,6 @@ $editTask = editTasks($database);
             <?php if ($message !== '') : ?>
                 <p class="success"><?php echo $message; ?></p>
             <?php endif; ?>
-
 
             <?php print_r($_SESSION['task']); ?>
             <?php print_r($_SESSION['subtask']); ?>
@@ -84,7 +74,6 @@ $editTask = editTasks($database);
             </div>
         </div>
     </article>
-
 </section>
 
 <?php
