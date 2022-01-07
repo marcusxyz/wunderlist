@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__ . '/../../autoload.php';
 
 if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['password-confirm'])) {
     $username = trim($_POST['username']); // FILTER_SANITIZE_STRING is deprecated.

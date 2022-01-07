@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__ . '/../../autoload.php';
 
 // If user is signed in, show session vairables
 if (isset($_SESSION['user'])) {
     $id = $_SESSION['user']['id'];
-    $username = $_SESSION['user']['name'];
+    $username = $_SESSION['user']['username'];
     $email = $_SESSION['user']['email'];
 } else {
     redirect('/signin.php');
@@ -40,10 +40,12 @@ if (isset($_POST['delete'])) {
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->execute();
 
+            // Don't forget to delete users tasks and subtasks!
+
             $_SESSION['message'] = 'Your account has been deleted';
 
+            redirect('/signin.php');
             session_destroy();
-            redirect('/');
         } else {
             $_SESSION['error'] = 'Your password has been entered incorrectly.';
         }

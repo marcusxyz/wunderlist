@@ -17,7 +17,7 @@ require __DIR__ . '/general/notifications.php';
             <?php if ($error !== '') : ?>
                 <p class="error"><?= $error; ?></p>
             <?php endif; ?>
-            <form action="app/users/signup-process.php" method="post">
+            <form action="app/users//create/signup-process.php" method="post">
                 <div class="form">
                     <label for="username">Username</label>
                     <input type="username" name="username" id="username" placeholder="Enter your username" required>

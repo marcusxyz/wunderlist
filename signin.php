@@ -23,7 +23,7 @@ require __DIR__ . '/general/notifications.php';
                 <p class="success"><?php echo $message; ?></p>
             <?php endif; ?>
 
-            <form class="sign-in" action="app/users/signin-process.php" method="post">
+            <form class="sign-in" action="app/users/create/signin-process.php" method="post">
 
                 <div class="form">
                     <label for="email">Email</label>
