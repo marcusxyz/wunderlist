@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../autoload.php';
+require __DIR__ . '/../../autoload.php';
 
 $id = $_SESSION['user']['id'];
 $userProfile = $_SESSION['user']['avatar'];
@@ -25,7 +25,7 @@ if (isset($_FILES['avatar'])) {
     }
 
     $userProfile = 'userID-' . $id . '-' . date('ymd');
-    $folderPath = __DIR__ . '/../../uploads/';
+    $folderPath = __DIR__ . '/../../../uploads/';
     $destination = $folderPath . $userProfile;
 
     move_uploaded_file($avatar['tmp_name'], $destination);
