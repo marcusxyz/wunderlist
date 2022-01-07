@@ -38,6 +38,7 @@ if (isset($_POST['subtask-id'], $_POST['subtask-name'], $_POST['subtask-status']
         $statement->bindParam(':id', $subTaskID, PDO::PARAM_INT);
         $statement->bindParam(':status', $status, PDO::PARAM_INT);
         $statement->execute();
+
         redirect("/edit-task.php?id=$id");
     }
 
@@ -52,6 +53,7 @@ if (isset($_POST['subtask-id'], $_POST['subtask-name'], $_POST['subtask-status']
         $statement->bindParam(':id', $subTaskID, PDO::PARAM_INT);
         $statement->bindParam(':status', $status, PDO::PARAM_INT);
         $statement->execute();
+
         redirect("/edit-task.php?id=$id");
     }
     redirect("/edit-task.php?id=$id");

@@ -66,9 +66,11 @@ $editTask = editTasks($database);
                             <input type="hidden" name="subtask-id" value="<?= $subTask['id']; ?>">
                             <input type="hidden" name="subtask-name" value="<?= $subTask['subtask_name']; ?>">
                             <input type="hidden" name="subtask-status" value="<?= $subTask['status']; ?>">
-                            <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" value="<?= $subTask['status']; ?>" <?php if ($subTask['status'] == 1) {
-                                                                                                                                        echo 'checked="checked"';
-                                                                                                                                    } ?> />
+                            <?php if ($subTask['status'] == 1) : ?>
+                                <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" <?= 'checked="checked"' ?> />
+                            <?php else : ?>
+                                <input type="checkbox" name="checkbox-toggle" id="checkbox-toggle" />
+                            <?php endif; ?>
                         </form>
                         <p><?= $subTask['subtask_name']; ?></p>
                     </div>
