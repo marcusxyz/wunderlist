@@ -1,5 +1,12 @@
-.edit-task-container {
+section.edit-task-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
   margin-top: 4rem;
+}
+
+.forms {
+  width: 100%;
 }
 
 .form-content h1 {
@@ -91,4 +98,20 @@ form.subtask .delete:hover {
 .btn.btn-half.delete:hover {
   color: var(--white);
   background-color: var(--error);
+}
+
+/* Desktop */
+
+@media screen and (min-width: 1280px) {
+  section.edit-task-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-top: 4rem;
+  }
+
+  .forms {
+    width: 50%;
+    padding: 0 8rem;
+  }
 }

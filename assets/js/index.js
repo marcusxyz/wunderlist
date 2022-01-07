@@ -1,5 +1,6 @@
 const checkboxes = document.querySelectorAll('input[type=checkbox]');
 
+// When the user clicks on the checkbox the form will automagically submit.
 checkboxes.forEach((checkbox) => {
   checkbox.onclick = function () {
     this.parentNode.submit();
