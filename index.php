@@ -21,7 +21,7 @@ if (isset($_POST['new-task'])) {
             <p class="success"><?php echo $message; ?></p>
         <?php endif; ?>
         <h1>Welcome <?= $_SESSION['user']['username']; ?></h1>
-        <?php if (empty(fetchTasks($database))) : ?>
+        <?php if (empty(fetchTasks($database) && empty(taskCompleted($database)))) : ?>
             <p>Start by making a new task below!</p>
         <?php endif; ?>
         <a href="/create-task.php">
@@ -61,10 +61,19 @@ if (isset($_POST['new-task'])) {
         <?php if (!empty(fetchTasks($database))) : ?>
             <h2>Your tasks</h2>
         <?php endif; ?>
-        <?php if (empty(fetchTasks($database)) && empty(fetchTodaysTasks($database))) : ?>
+        <?php if (empty(fetchTasks($database)) && empty(taskCompleted($database)) && empty(fetchTodaysTasks($database))) : ?>
+            <h2>Your tasks</h2>
             <div class="task-item empty">
                 <div class="task-item-title">
-                    <h3>Awesome, you’re all caught up!</h3>
+                    <h3>📝 No task created 📝</h3>
+                    <p>Your newly created tasks will show up here.</p>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (empty(fetchTodaysTasks($database)) && empty(fetchTasks($database)) && !empty(taskCompleted($database))) : ?>
+            <div class="task-item empty">
+                <div class="task-item-title">
+                    <h3>💫 Awesome, you’re all caught up! 💫</h3>
                     <p>Great job, now go ahead and take a break, or do what you do best!</p>
                 </div>
             </div>
@@ -97,8 +106,8 @@ if (isset($_POST['new-task'])) {
         <?php if (empty(taskCompleted($database))) : ?>
             <div class="task-item empty">
                 <div class="task-item-title">
-                    <h3>You can do it!</h3>
-                    <p>Your completed tasks will show up here once it’s done.</p>
+                    <h3>✅ You can do it! ✅</h3>
+                    <p>Your completed tasks will show up here.</p>
                 </div>
             </div>
         <?php else : ?>

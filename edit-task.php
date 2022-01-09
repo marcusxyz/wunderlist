@@ -37,8 +37,6 @@ $editTask = editTasks($database);
             </div>
             <p>In here you can edit your task, add checklist, update it and delete your task.</p>
 
-            <!-- <?php print_r($_SESSION['task']); ?>
-                <?php print_r($_SESSION['subtask']); ?> -->
             <form action="app/tasks/update/update-task.php" method="post" required>
                 <div class="form">
                     <label for="task_name">Title</label>
