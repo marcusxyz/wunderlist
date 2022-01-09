@@ -12,10 +12,9 @@ function fetchTasks($database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 0;
-    $today = date('D, M j, Y');
+    $today = date('D j M Y');
 
-
-    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date < :due_date AND status = :status ORDER BY due_date DESC');
+    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date != :due_date AND status = :status ORDER BY due_date DESC');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
     $statement->bindParam(':status', $status, PDO::PARAM_INT);
@@ -61,7 +60,7 @@ function fetchTodaysTasks($database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 0;
-    $today = date('D, M j, Y');
+    $today = date('D j M Y');
 
     $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date = :due_date AND status = :status');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);

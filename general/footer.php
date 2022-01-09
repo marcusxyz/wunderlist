@@ -6,9 +6,9 @@
 <script>
     config = {
         enableTime: false,
-        dateFormat: "D, M j, Y",
+        dateFormat: "D j M Y",
         altInput: true,
-        altFormat: "D, M j, Y",
+        altFormat: "D j M Y",
     }
 
     flatpickr("input[type=datetime]", config);

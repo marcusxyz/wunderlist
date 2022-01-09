@@ -80,7 +80,7 @@ if (isset($_POST['new-task'])) {
         <?php else : ?>
             <?php foreach (fetchTasks($database) as $task) : ?>
                 <a href="/edit-task.php?id=<?= $task['id']; ?>">
-                    <div class="task-item">
+                    <div class="task-item" id="task-item">
                         <div class="task-item-title">
                             <h3><?= $task['task_name']; ?></h3>
                             <p><?= $task['task_notes']; ?></p>
@@ -135,3 +135,5 @@ if (isset($_POST['new-task'])) {
         <?php endif; ?>
     </section>
 </main>
+
+<script src="/assets/js/index.js"></script>
