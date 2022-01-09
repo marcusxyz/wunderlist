@@ -11,17 +11,19 @@ if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
     $taskNotes = trim($_POST['task_notes']);
     $dueDate = trim($_POST['due_date']);
     $createdDate = date('Y-m-d H:i');
+    $status = 0;
 
     // Connect users to their tasks by inserting user_id to tasks table.
     $userID = $_SESSION['user']['id'];
 
     // Insert $userID, $title, $task_notes, $dueDate into tasks table
-    $statement = $database->prepare('INSERT INTO tasks (user_id, list_id, task_name, task_notes, due_date, created_date) VALUES(:user_id, :list_id, :task_name, :task_notes, :due_date, :created_date)');
+    $statement = $database->prepare('INSERT INTO tasks (user_id, list_id, task_name, task_notes, due_date, created_date, status) VALUES(:user_id, :list_id, :task_name, :task_notes, :due_date, :created_date, :status)');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $statement->bindParam(':task_name', $taskName, PDO::PARAM_STR);
     $statement->bindParam(':task_notes', $taskNotes, PDO::PARAM_STR);
     $statement->bindParam(':due_date', $dueDate, PDO::PARAM_STR);
     $statement->bindParam(':created_date', $createdDate, PDO::PARAM_STR);
+    $statement->bindParam(':status', $status, PDO::PARAM_INT);
     $statement->execute();
 
     $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id');

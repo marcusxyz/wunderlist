@@ -26,7 +26,7 @@ if (isset($_POST['new-task'])) {
         <?php else : ?>
             <p>You have x tasks that needs to be done today</p>
         <?php endif; ?>
-        <a href="/new-task.php">
+        <a href="/create-task.php">
             <button class="btn btn-half">New task</button>
         </a>
     </div>

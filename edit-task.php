@@ -29,7 +29,11 @@ $editTask = editTasks($database);
         <div class="forms">
             <div class="task-info">
                 <h1><?= $editTask['task_name']; ?></h1>
-                <a href="" class="btn btn-stroke">Mark as done</a>
+                <?php if ($editTask['status'] == 0) : ?>
+                    <a href="/app/tasks/update/task-status-done.php" class="btn btn-stroke">Mark as done</a>
+                <?php else : ?>
+                    <a href="/app/tasks/update/task-status-undone.php" class="btn btn-stroke">Mark as undone</a>
+                <?php endif; ?>
             </div>
             <p>In here you can edit your task, add checklist, update it and delete your task.</p>
 

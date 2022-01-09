@@ -34,6 +34,7 @@ function editTasks($database)
         'task_name' => $getTask['task_name'],
         'due_date' => $getTask['due_date'],
         'task_notes' => $getTask['task_notes'],
+        'status' => $getTask['status'],
     ];
     return $getTask;
 }
