@@ -5,7 +5,7 @@
 
 <script>
     config = {
-        enableTime: true,
+        enableTime: false,
         dateFormat: "D, M j, Y",
         altInput: true,
         altFormat: "D, M j, Y",

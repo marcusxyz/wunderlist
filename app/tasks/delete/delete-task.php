@@ -11,8 +11,6 @@ if (!isset($_SESSION['user'])) {
 
 // In here users can delete tasks along with their subtasks
 
-print_r($_SESSION['task']);
-
 $taskID = $_SESSION['task']['id'];
 $task_name = $_SESSION['task']['task_name'];
 

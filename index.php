@@ -33,6 +33,32 @@ if (isset($_POST['new-task'])) {
     <!-- <?php print_r($_SESSION['user']); ?> -->
     <br>
     <!-- <?php print_r($_SESSION['tasks']); ?> -->
+    <section class="task-container">
+        <?php if (empty(fetchTodaysTasks($database))) : ?>
+        <?php else : ?>
+            <h2>Todays tasks</h2>
+            <?php foreach (fetchTodaysTasks($database) as $task) : ?>
+                <a href="/edit-task.php?id=<?= $task['id']; ?>">
+                    <div class="task-item red">
+                        <div class="task-item-title">
+                            <h3><?= $task['task_name']; ?></h3>
+                            <p><?= $task['task_notes']; ?></p>
+                        </div>
+                        <div class="due-date">
+                            <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="8" cy="11" r="7" stroke="#1A1B1C" stroke-opacity="0.9" stroke-width="2" />
+                                <rect x="5" width="6" height="2" fill="#1A1B1C" fill-opacity="0.9" />
+                                <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="#1A1B1C" fill-opacity="0.9" />
+                            </svg>
+                            <p>
+                                <?= $task['due_date']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </section>
 
     <section class="task-container">
         <h2>Your tasks</h2>

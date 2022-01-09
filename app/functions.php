@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-// Can't get this to work
 function redirect(string $path)
 {
     header("Location: ${path}");
@@ -50,4 +49,18 @@ function fetchSubTasks($database): array
     $getSubTasks = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $getSubTasks;
+}
+
+function fetchTodaysTasks($database): array
+{
+    $userID = $_SESSION['user']['id'];
+    $today = date('D, M j, Y');
+
+    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date = :due_date');
+    $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
+    $statement->execute();
+
+    $getTodaysTask = $statement->fetchALL(PDO::FETCH_ASSOC);
+    return $getTodaysTask;
 }
