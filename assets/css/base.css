@@ -114,7 +114,7 @@ textarea {
 }
 
 textarea {
-  height: 12rem;
+  height: 6rem;
   resize: vertical;
 }
 
@@ -219,6 +219,23 @@ label.link-pfp:hover {
 
 .button-container .btn.btn-half {
   width: calc(50% - 0.25rem);
+}
+
+.btn.btn-stroke {
+  width: auto;
+  margin-top: 0;
+  padding: 0.5rem 0.75em;
+  text-align: center;
+  background-color: transparent;
+  border: 2px solid var(--purple);
+  border-radius: 0.25rem;
+  color: var(--purple);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn.btn-stroke:hover {
+  color: var(--white);
 }
 
 small {

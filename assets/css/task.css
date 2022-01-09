@@ -1,24 +1,32 @@
-section.edit-task-container {
-  display: flex;
+.form-container {
   width: 100%;
+  display: flex;
   flex-direction: column;
-  margin-top: 4rem;
+  margin-top: 1rem;
+}
+
+.message-container {
+  margin: 1rem 0;
+}
+
+.task-info {
+  margin-bottom: 2rem;
+}
+
+.task-info h1 {
+  margin-bottom: 1rem;
 }
 
 .forms {
   width: 100%;
 }
 
-.form-content h1 {
+.forms p {
   margin-bottom: 1rem;
 }
 
-.form-content p {
-  margin-bottom: 1.5rem;
-}
-
 .subtask-container {
-  margin-bottom: 2rem;
+  margin: 3rem 0;
 }
 
 .subtask-item {
@@ -92,7 +100,13 @@ form.subtask .delete:hover {
 .btn.btn-half.delete {
   background-color: #f9f0ef;
   color: var(--error);
+  text-align: center;
   /* border: 2px solid var(--error); */
+}
+
+.btn.btn-half.delete a {
+  color: var(--error);
+  width: calc(50% - 0.25rem);
 }
 
 .btn.btn-half.delete:hover {
@@ -100,18 +114,27 @@ form.subtask .delete:hover {
   background-color: var(--error);
 }
 
+.btn.btn-half.delete a:hover {
+  color: var(--white);
+}
+
 /* Desktop */
 
 @media screen and (min-width: 1280px) {
-  section.edit-task-container {
-    display: flex;
-    width: 100%;
+  .form-container {
     flex-direction: row;
-    margin-top: 4rem;
+  }
+
+  .message-container {
+    padding: 0 8rem;
   }
 
   .forms {
     width: 50%;
     padding: 0 8rem;
+  }
+
+  .subtask-container {
+    margin: 11rem 0 0 0;
   }
 }
