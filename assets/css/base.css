@@ -100,6 +100,10 @@ ul {
   color: var(--black);
 }
 
+p.warning {
+  color: var(--error);
+}
+
 input,
 textarea {
   width: 100%;

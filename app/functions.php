@@ -11,16 +11,21 @@ function redirect(string $path)
 function fetchTasks($database): array
 {
     $userID = $_SESSION['user']['id'];
+    $status = 0;
+    $today = date('D, M j, Y');
 
-    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id');
+
+    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date < :due_date AND status = :status ORDER BY due_date DESC');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
+    $statement->bindParam(':status', $status, PDO::PARAM_INT);
     $statement->execute();
 
     $getTasks = $statement->fetchALL(PDO::FETCH_ASSOC);
     return $getTasks;
 }
 
-function editTasks($database)
+function editTasks($database): array
 {
     $taskID = $_SESSION['taskID'];
     $statement = $database->prepare('SELECT * FROM tasks WHERE id = :id');
@@ -55,13 +60,29 @@ function fetchSubTasks($database): array
 function fetchTodaysTasks($database): array
 {
     $userID = $_SESSION['user']['id'];
+    $status = 0;
     $today = date('D, M j, Y');
 
-    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date = :due_date');
+    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date = :due_date AND status = :status');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':status', $status, PDO::PARAM_INT);
     $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
     $statement->execute();
 
-    $getTodaysTask = $statement->fetchALL(PDO::FETCH_ASSOC);
-    return $getTodaysTask;
+    $getTodaysTasks = $statement->fetchALL(PDO::FETCH_ASSOC);
+    return $getTodaysTasks;
+}
+
+function taskCompleted($database): array
+{
+    $userID = $_SESSION['user']['id'];
+    $status = 1;
+
+    $statement = $database->query('SELECT * FROM tasks WHERE user_id = :user_id AND status = :status');
+    $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $statement->bindParam(':status', $status, PDO::PARAM_INT);
+    $statement->execute();
+
+    $getCompletedTasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $getCompletedTasks;
 }

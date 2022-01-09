@@ -30,6 +30,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  position: relative;
 }
 
 .task-item:hover {
@@ -45,6 +47,17 @@ main {
   background-color: transparent;
   text-align: center;
   padding: 2.5rem;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--nav-gray);
+  opacity: 0.75;
+  width: 100%;
+  height: 100%;
 }
 
 .due-date {
@@ -54,8 +67,4 @@ main {
 
 .due-date p {
   margin-left: 0.5rem;
-}
-
-.completed {
-  margin-bottom: 4rem;
 }
