@@ -12,18 +12,25 @@ if (isset($_POST['new-task'])) {
     redirect('/new-task.php');
 }
 
+// Store returned data as variables
+$uncompletedTasks = fetchTasks($database);
+$completedTasks = taskCompleted($database);
+$taskDueToday = fetchTodaysTasks($database);
+
 ?>
 <main>
-
     <!-- Here is where the tasks will be -->
     <div class="welcome-content">
         <?php if ($message !== '') : ?>
             <p class="success"><?php echo $message; ?></p>
         <?php endif; ?>
         <h1>Welcome <?= $_SESSION['user']['username']; ?></h1>
-        <?php if (empty(fetchTasks($database) && empty(taskCompleted($database)))) : ?>
+        <?php if (count($uncompletedTasks) == 0 && (count($taskDone) == 0)) : ?>
             <p>Start by making a new task below!</p>
+        <?php elseif (count($taskDueToday) > 0) : ?>
+            <p>Your have <?php print_r(count($taskDueToday)); ?> task that needs to be done today.</p>
         <?php endif; ?>
+        <!--  -->
         <a href="/create-task.php">
             <button class="btn btn-half">New task</button>
         </a>
@@ -32,9 +39,9 @@ if (isset($_POST['new-task'])) {
     <br>
     <!-- <?php print_r($_SESSION['tasks']); ?> -->
     <section class="task-container">
-        <?php if (!empty(fetchTodaysTasks($database))) : ?>
+        <?php if (count($uncompletedTasks) !== 0) : ?>
             <h2>Todays tasks</h2>
-            <?php foreach (fetchTodaysTasks($database) as $task) : ?>
+            <?php foreach ($taskDueToday as $task) : ?>
                 <a href="/edit-task.php?id=<?= $task['id']; ?>">
                     <div class="task-item red">
                         <div class="task-item-title">
@@ -58,10 +65,10 @@ if (isset($_POST['new-task'])) {
     </section>
 
     <section class="task-container">
-        <?php if (!empty(fetchTasks($database))) : ?>
+        <?php if (count($taskDueToday) !== 0) : ?>
             <h2>Your tasks</h2>
         <?php endif; ?>
-        <?php if (empty(fetchTasks($database)) && empty(taskCompleted($database)) && empty(fetchTodaysTasks($database))) : ?>
+        <?php if (count($uncompletedTasks) == 0 && count($taskDueToday) == 0 && count($completedTasks) == 0) : ?>
             <h2>Your tasks</h2>
             <div class="task-item empty">
                 <div class="task-item-title">
@@ -70,7 +77,7 @@ if (isset($_POST['new-task'])) {
                 </div>
             </div>
         <?php endif; ?>
-        <?php if (empty(fetchTodaysTasks($database)) && empty(fetchTasks($database)) && !empty(taskCompleted($database))) : ?>
+        <?php if (count($uncompletedTasks) == 0 && count($taskDueToday) == 0 && count($completedTasks) !== 0) : ?>
             <div class="task-item empty">
                 <div class="task-item-title">
                     <h3>💫 Awesome, you’re all caught up! 💫</h3>
@@ -78,7 +85,7 @@ if (isset($_POST['new-task'])) {
                 </div>
             </div>
         <?php else : ?>
-            <?php foreach (fetchTasks($database) as $task) : ?>
+            <?php foreach ($uncompletedTasks as $task) : ?>
                 <a href="/edit-task.php?id=<?= $task['id']; ?>">
                     <div class="task-item" id="task-item">
                         <div class="task-item-title">
@@ -104,7 +111,7 @@ if (isset($_POST['new-task'])) {
 
     <section class="task-container complete">
         <h2>Completed</h2>
-        <?php if (empty(taskCompleted($database))) : ?>
+        <?php if (count($completedTasks) == 0) : ?>
             <div class="task-item empty">
                 <div class="task-item-title">
                     <h3>✅ You can do it! ✅</h3>
@@ -112,7 +119,7 @@ if (isset($_POST['new-task'])) {
                 </div>
             </div>
         <?php else : ?>
-            <?php foreach (taskCompleted($database) as $task) : ?>
+            <?php foreach ($completedTasks as $task) : ?>
                 <a href="/edit-task.php?id=<?= $task['id']; ?>">
                     <div class="task-item completed">
                         <div class="overlay"></div>

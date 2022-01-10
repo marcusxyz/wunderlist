@@ -8,13 +8,13 @@ function redirect(string $path)
     exit;
 }
 
-function fetchTasks(object $database): array
+function fetchTasks(PDO $database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 0;
     $today = date('D j M Y');
 
-    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date != :due_date AND status = :status ORDER BY due_date DESC');
+    $statement = $database->query('SELECT * FROM tasks WHERE user_id = :user_id AND due_date != :due_date AND status = :status ORDER BY due_date DESC');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
     $statement->bindParam(':status', $status, PDO::PARAM_INT);
@@ -24,7 +24,7 @@ function fetchTasks(object $database): array
     return $getTasks;
 }
 
-function editTasks(object $database): array
+function editTasks(PDO $database): array
 {
     $taskID = $_SESSION['taskID'];
     $statement = $database->prepare('SELECT * FROM tasks WHERE id = :id');
@@ -43,7 +43,7 @@ function editTasks(object $database): array
     return $getTask;
 }
 
-function fetchSubTasks(object $database): array
+function fetchSubTasks(PDO $database): array
 {
     $taskID = $_SESSION['task']['id'];
 
@@ -56,13 +56,13 @@ function fetchSubTasks(object $database): array
     return $getSubTasks;
 }
 
-function fetchTodaysTasks(object $database): array
+function fetchTodaysTasks(PDO $database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 0;
     $today = date('D j M Y');
 
-    $statement = $database->prepare('SELECT * FROM tasks WHERE user_id = :user_id AND due_date = :due_date AND status = :status');
+    $statement = $database->query('SELECT * FROM tasks WHERE user_id = :user_id AND due_date = :due_date AND status = :status');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $statement->bindParam(':status', $status, PDO::PARAM_INT);
     $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
@@ -72,7 +72,7 @@ function fetchTodaysTasks(object $database): array
     return $getTodaysTasks;
 }
 
-function taskCompleted(object $database): array
+function taskCompleted(PDO $database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 1;
