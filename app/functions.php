@@ -8,7 +8,7 @@ function redirect(string $path)
     exit;
 }
 
-function fetchTasks($database): array
+function fetchTasks(object $database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 0;
@@ -24,7 +24,7 @@ function fetchTasks($database): array
     return $getTasks;
 }
 
-function editTasks($database): array
+function editTasks(object $database): array
 {
     $taskID = $_SESSION['taskID'];
     $statement = $database->prepare('SELECT * FROM tasks WHERE id = :id');
@@ -43,7 +43,7 @@ function editTasks($database): array
     return $getTask;
 }
 
-function fetchSubTasks($database): array
+function fetchSubTasks(object $database): array
 {
     $taskID = $_SESSION['task']['id'];
 
@@ -56,7 +56,7 @@ function fetchSubTasks($database): array
     return $getSubTasks;
 }
 
-function fetchTodaysTasks($database): array
+function fetchTodaysTasks(object $database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 0;
@@ -72,7 +72,7 @@ function fetchTodaysTasks($database): array
     return $getTodaysTasks;
 }
 
-function taskCompleted($database): array
+function taskCompleted(object $database): array
 {
     $userID = $_SESSION['user']['id'];
     $status = 1;

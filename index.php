@@ -95,6 +95,7 @@ if (isset($_POST['new-task'])) {
                                 <?= $task['due_date']; ?>
                             </p>
                         </div>
+
                     </div>
                 </a>
             <?php endforeach; ?>
