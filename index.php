@@ -28,7 +28,7 @@ $taskDueToday = fetchTodaysTasks($database);
         <?php if (count($uncompletedTasks) == 0 && (count($taskDone) == 0)) : ?>
             <p>Start by making a new task below!</p>
         <?php elseif (count($taskDueToday) > 0) : ?>
-            <p>Your have <?php print_r(count($taskDueToday)); ?> task that needs to be done today.</p>
+            <p>Your have <strong><?php print_r(count($taskDueToday)); ?></strong> task that needs to be done today.</p>
         <?php endif; ?>
         <!--  -->
         <a href="/create-task.php">
@@ -38,33 +38,32 @@ $taskDueToday = fetchTodaysTasks($database);
     <!-- <?php print_r($_SESSION['user']); ?> -->
     <br>
     <!-- <?php print_r($_SESSION['tasks']); ?> -->
-    <section class="task-container">
-        <?php if (count($uncompletedTasks) !== 0) : ?>
-            <h2>Todays tasks</h2>
+    <?php if (count($uncompletedTasks) !== 0) : ?>
+        <h2>Todays tasks</h2>
+        <section class="task-container">
             <?php foreach ($taskDueToday as $task) : ?>
-                <a href="/edit-task.php?id=<?= $task['id']; ?>">
-                    <div class="task-item red">
+                <a class="task-item" href="/edit-task.php?id=<?= $task['id']; ?>">
+                    <div>
                         <div class="task-item-title">
                             <h3><?= $task['task_name']; ?></h3>
                             <p><?= $task['task_notes']; ?></p>
-                        </div>
-                        <div class="due-date">
-                            <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8" cy="11" r="7" stroke="var(--black)" stroke-opacity="0.9" stroke-width="2" />
-                                <rect x="5" width="6" height="2" fill="var(--black)" fill-opacity="0.9" />
-                                <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="var(--black)" fill-opacity="0.9" />
-                            </svg>
-                            <p>
-                                <?= $task['due_date']; ?>
-                            </p>
+                            <div class="due-date">
+                                <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="11" r="7" stroke="var(--black)" stroke-opacity="0.9" stroke-width="2" />
+                                    <rect x="5" width="6" height="2" fill="var(--black)" fill-opacity="0.9" />
+                                    <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="var(--black)" fill-opacity="0.9" />
+                                </svg>
+                                <span>
+                                    <?= $task['due_date']; ?>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </a>
             <?php endforeach; ?>
         <?php endif; ?>
-    </section>
+        </section>
 
-    <section class="task-container">
         <?php if (count($taskDueToday) !== 0) : ?>
             <h2>Your tasks</h2>
         <?php endif; ?>
@@ -85,31 +84,31 @@ $taskDueToday = fetchTodaysTasks($database);
                 </div>
             </div>
         <?php else : ?>
-            <?php foreach ($uncompletedTasks as $task) : ?>
-                <a href="/edit-task.php?id=<?= $task['id']; ?>">
-                    <div class="task-item" id="task-item">
-                        <div class="task-item-title">
-                            <h3><?= $task['task_name']; ?></h3>
-                            <p><?= $task['task_notes']; ?></p>
-                        </div>
-                        <div class="due-date">
-                            <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8" cy="11" r="7" stroke="var(--black)" stroke-opacity="0.9" stroke-width="2" />
-                                <rect x="5" width="6" height="2" fill="var(--black)" fill-opacity="0.9" />
-                                <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="var(--black)" fill-opacity="0.9" />
-                            </svg>
-                            <p>
-                                <?= $task['due_date']; ?>
-                            </p>
-                        </div>
+            <section class="task-container">
+                <?php foreach ($uncompletedTasks as $task) : ?>
+                    <a class="task-item" href="/edit-task.php?id=<?= $task['id']; ?>">
+                        <div>
+                            <div class="task-item-title">
+                                <h3><?= $task['task_name']; ?></h3>
+                                <p><?= $task['task_notes']; ?></p>
+                            </div>
+                            <div class="due-date">
+                                <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="11" r="7" stroke="var(--black)" stroke-opacity="0.9" stroke-width="2" />
+                                    <rect x="5" width="6" height="2" fill="var(--black)" fill-opacity="0.9" />
+                                    <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="var(--black)" fill-opacity="0.9" />
+                                </svg>
+                                <span>
+                                    <?= $task['due_date']; ?>
+                                </span>
+                            </div>
 
-                    </div>
-                </a>
-            <?php endforeach; ?>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </section>
         <?php endif; ?>
-    </section>
 
-    <section class="task-container complete">
         <h2>Completed</h2>
         <?php if (count($completedTasks) == 0) : ?>
             <div class="task-item empty">
@@ -119,29 +118,30 @@ $taskDueToday = fetchTodaysTasks($database);
                 </div>
             </div>
         <?php else : ?>
-            <?php foreach ($completedTasks as $task) : ?>
-                <a href="/edit-task.php?id=<?= $task['id']; ?>">
-                    <div class="task-item completed">
-                        <div class="overlay"></div>
-                        <div class="task-item-title">
-                            <h3><?= $task['task_name']; ?></h3>
-                            <p><?= $task['task_notes']; ?></p>
+            <section class="task-container complete">
+                <?php foreach ($completedTasks as $task) : ?>
+                    <a class="task-item completed" href="/edit-task.php?id=<?= $task['id']; ?>">
+                        <div>
+                            <div class="overlay"></div>
+                            <div class="task-item-title">
+                                <h3><?= $task['task_name']; ?></h3>
+                                <p><?= $task['task_notes']; ?></p>
+                            </div>
+                            <div class="due-date">
+                                <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="11" r="7" stroke="#1A1B1C" stroke-opacity="0.9" stroke-width="2" />
+                                    <rect x="5" width="6" height="2" fill="#1A1B1C" fill-opacity="0.9" />
+                                    <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="#1A1B1C" fill-opacity="0.9" />
+                                </svg>
+                                <span>
+                                    <?= $task['due_date']; ?>
+                                </span>
+                            </div>
                         </div>
-                        <div class="due-date">
-                            <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8" cy="11" r="7" stroke="#1A1B1C" stroke-opacity="0.9" stroke-width="2" />
-                                <rect x="5" width="6" height="2" fill="#1A1B1C" fill-opacity="0.9" />
-                                <rect x="9" y="6" width="6" height="2" transform="rotate(90 9 6)" fill="#1A1B1C" fill-opacity="0.9" />
-                            </svg>
-                            <p>
-                                <?= $task['due_date']; ?>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            <?php endforeach; ?>
+                    </a>
+                <?php endforeach; ?>
+            </section>
         <?php endif; ?>
-    </section>
 </main>
 
 <script src="/assets/js/index.js"></script>
