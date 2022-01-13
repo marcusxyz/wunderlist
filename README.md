@@ -54,4 +54,8 @@ Overall a nice looking to-do application! A lot of good implementations and func
 Tested by the following people:
 
 1. Christopher Michael
+<<<<<<< HEAD
 2. TBA
+=======
+2. Johanna Jönsson
+>>>>>>> 52a71f40aa134b4e94a28ebdc67c35e7e99f6ddd
