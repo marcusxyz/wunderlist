@@ -52,12 +52,10 @@ if (isset($_POST['delete'])) {
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->execute();
 
-            // Don't forget to delete users tasks and subtasks!
-
+            session_destroy();
             $_SESSION['message'] = 'Your account has been deleted';
 
             redirect('/signin.php');
-            session_destroy();
         } else {
             $_SESSION['error'] = 'Your password has been entered incorrectly.';
         }

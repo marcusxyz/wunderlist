@@ -12,7 +12,6 @@ require __DIR__ . '/general/notifications.php';
 
     <article>
         <div class="form-content">
-
             <h1>Sign in</h1>
 
             <?php if ($error !== '') : ?>
