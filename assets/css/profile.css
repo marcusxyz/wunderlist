@@ -76,6 +76,14 @@ input.unlink-pfp {
   margin-bottom: 1.5rem;
 }
 
+.account-container p {
+  margin-bottom: 2rem;
+}
+
+.account-container h1 {
+  margin-top: 2rem;
+}
+
 /* Desktop */
 @media screen and (min-width: 1280px) {
   main {

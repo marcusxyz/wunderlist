@@ -84,6 +84,7 @@ form.subtask .delete:hover {
   width: auto;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
   color: var(--white);
   background-color: var(--purple);
 }
@@ -122,6 +123,14 @@ form.subtask .delete:hover {
   padding-left: 0;
 }
 
+.form-content p {
+  margin-bottom: 2rem;
+}
+
+.edit-subtask h1 {
+  margin-top: 2rem;
+}
+
 /* Desktop */
 
 @media screen and (min-width: 1280px) {
@@ -144,5 +153,10 @@ form.subtask .delete:hover {
 
   .back-link {
     padding-left: 8rem;
+  }
+
+  .edit-subtask {
+    width: 40%;
+    margin: 6rem auto;
   }
 }

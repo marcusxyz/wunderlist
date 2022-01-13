@@ -32,9 +32,6 @@ if (isset($_POST['email'], $_POST['password'])) {
             'email' => $user['email'],
             'avatar' => $user['avatar'],
         ];
-        // unset($user['password']); This also hides other session values on refresh..
-
-        $_SESSION['message'] = 'Welcome ' . $user['username'] . '!';
         redirect('/');
     } else {
         $_SESSION['error'] = 'The provided credentials does not match our records.';

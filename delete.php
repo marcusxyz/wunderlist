@@ -15,34 +15,35 @@ if (!isset($_SESSION['user'])) {
 
 <!-- Manage your account -->
 <section class="profile">
+    <div class="account-container">
+        <a href="/profile.php">Go back</a>
+        <h1>Delete your account</h1>
 
-    <h1>Delete your account</h1>
-    <h4></h4>
+        <p>Please enter 'DELETE' and your password to confirm that you wish to delete your account. Once confirmed, this account will no longer be available and all data in the account will be permanently deleted.</p>
 
-    <p>Please enter 'DELETE' and your password to confirm that you wish to delete your account. Once confirmed, this account will no longer be available and all data in the account will be permanently deleted.</p>
+        <?php if ($error !== '') : ?>
+            <p class="error"><?= $error; ?></p>
+        <?php endif; ?>
 
-    <?php if ($error !== '') : ?>
-        <p class="error"><?= $error; ?></p>
-    <?php endif; ?>
+        <?php if ($message !== '') : ?>
+            <p class="success"><?php echo $message; ?></p>
+        <?php endif; ?>
 
-    <?php if ($message !== '') : ?>
-        <p class="success"><?php echo $message; ?></p>
-    <?php endif; ?>
-
-    <form action="app/users/delete/delete-profile.php" method="post" class="account-settings">
-        <div class="form">
-            <label for="delete">Type DELETE to confirm</label>
-            <input type="delete" name="delete" id="delete">
-        </div>
-        <div class="form">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn secondary-full">Delete my account</button>
-    </form>
-    <a href="/profile.php" style="display: block;">
-        <button class="btn btn-full">Nevermind, keep my account</button>
-    </a>
+        <form action="app/users/delete/delete-profile.php" method="post" class="account-settings">
+            <div class="form">
+                <label for="delete">Type DELETE to confirm</label>
+                <input type="delete" name="delete" id="delete">
+            </div>
+            <div class="form">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn secondary-full">Delete my account</button>
+        </form>
+        <a href="/profile.php" style="display: block;">
+            <button class="btn btn-full">Nevermind, keep my account</button>
+        </a>
+    </div>
 
 </section>
 

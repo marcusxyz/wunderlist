@@ -186,9 +186,9 @@ label {
 
 .btn.secondary-full {
   width: 100%;
-  background-color: transparent;
-  border: 2px solid var(--error);
+  background-color: #f9f0ef;
   color: var(--error);
+  text-align: center;
 }
 
 .btn.secondary-full.done {
@@ -220,7 +220,6 @@ label.link-pfp:hover {
 
 .btn.secondary-full:hover {
   background-color: var(--error);
-  border: 2px solid var(--error);
   color: var(--white);
 }
 

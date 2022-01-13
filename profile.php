@@ -39,7 +39,6 @@ $userProfile = $_SESSION['user']['avatar'];
                         <input type="submit" id="remove-avatar" name="remove-avatar" class="unlink-pfp" value="Remove profile picture">
                     </form>
                 <?php endif; ?>
-
             </div>
         </div>
 

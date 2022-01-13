@@ -53,5 +53,5 @@ Overall a nice looking to-do application! A lot of good implementations and func
 
 Tested by the following people:
 
-1. TBA
+1. Christopher Michael
 2. TBA
