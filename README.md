@@ -44,9 +44,8 @@ Code review written by [Christopher Michael](https://github.com/chrs-m/).
 7. `index.js:36-42` - You might want to toggle/add a class instead of styling with JS.
 8. `profile.php:86` - Loading index.js again when it's already being loaded via the footer (same in index.php).
 9. `index.php:144` - The footer is not required in (same in profile, signin, signup and delete).
-10. `index.js:10-23` - *(Nitpick)* You might want to remove code thats not being used instead of having it commented out.
-11. `update-email.php:38-72` - *(Nitpick)* You might want to remove code thats not being used instead of having it commented out..
-
+10. `index.js:10-23` - _(Nitpick)_ You might want to remove code thats not being used instead of having it commented out.
+11. `update-email.php:38-72` - _(Nitpick)_ You might want to remove code thats not being used instead of having it commented out..
 
 Overall a nice looking to-do application! A lot of good implementations and functions. Nicely done with the subtasks! Got to give cred for the comments throughout the code. Well done Marcus! 👍🏼
 
