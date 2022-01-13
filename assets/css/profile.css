@@ -1,6 +1,10 @@
 /* Mobile */
-section.profile {
-  padding: 5.25rem 1rem 3rem 1rem;
+.account-container {
+  width: 100%;
+  padding: 0;
+  margin: 6rem 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile a {
@@ -22,8 +26,6 @@ div.change-pfp {
   position: relative;
   height: 240px;
   width: 240px;
-  /* background-color: red; */
-  /* border-radius: 100%; */
 }
 
 .profile-container img {
@@ -72,4 +74,16 @@ input.unlink-pfp {
 .account-settings p {
   margin-top: 4rem;
   margin-bottom: 1.5rem;
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  main {
+    padding: 0 10rem;
+  }
+
+  .account-container {
+    width: 60%;
+    margin: 6rem auto;
+  }
 }

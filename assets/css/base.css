@@ -53,6 +53,10 @@ body {
   background-color: var(--white);
 }
 
+main {
+  padding: 0 1rem;
+}
+
 h1,
 h2,
 h3,
@@ -259,4 +263,10 @@ small a {
 
 section {
   padding: 5.25rem 1rem 3rem 1rem;
+}
+
+@media screen and (min-width: 1280px) {
+  main {
+    padding: 0 3rem;
+  }
 }

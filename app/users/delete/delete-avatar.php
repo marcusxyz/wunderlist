@@ -7,8 +7,7 @@ require __DIR__ . '/../../autoload.php';
 $id = $_SESSION['user']['id'];
 $userProfile = $_SESSION['user']['avatar'];
 
-// Image upload
-
+// Remove image
 if (isset($_POST['remove-avatar'])) {
     $removeImage = null;
 
@@ -23,10 +22,7 @@ if (isset($_POST['remove-avatar'])) {
     $statement->execute();
 
     // Updating session variable
-    $_SESSION['user']['avatar'] = $removeUserImage;
-    // $_SESSION['error'] = 'Your profile picture has been removed';
+    $_SESSION['user']['avatar'] = $removeImage;
     redirect('/profile.php');
-} else {
-    echo 'We have a problem somewhere';
 }
 redirect('/profile.php');

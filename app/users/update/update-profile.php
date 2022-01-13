@@ -127,8 +127,6 @@ if ($username === $_POST['username'] && $email === $_POST['email'] && !empty($_P
                 $_SESSION['message'] = 'Your password has been updated';
                 redirect('/profile.php');
             }
-            // $_SESSION['message'] = 'Your old password is correct';
-            // redirect('/profile.php');
         } else {
             $_SESSION['error'] = 'Your old password has been entered incorrectly.';
             redirect('/profile.php');

@@ -64,7 +64,5 @@ if (isset($_POST['delete'])) {
 
         redirect('/delete.php');
     }
-
-
     redirect('/delete.php');
 }

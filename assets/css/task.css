@@ -118,6 +118,10 @@ form.subtask .delete:hover {
   color: var(--white);
 }
 
+.back-link {
+  padding-left: 0;
+}
+
 /* Desktop */
 
 @media screen and (min-width: 1280px) {
@@ -136,5 +140,9 @@ form.subtask .delete:hover {
 
   .subtask-container {
     margin: 11rem 0 0 0;
+  }
+
+  .back-link {
+    padding-left: 8rem;
   }
 }

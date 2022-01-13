@@ -45,7 +45,7 @@ if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
     }
 
 
-    $_SESSION['message'] = 'Great work! A new task has been added.';
+    $_SESSION['message'] = 'A new task has been added.';
     // Remove to show warnings
     redirect('/');
 }
