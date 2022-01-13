@@ -40,3 +40,7 @@ require __DIR__ . '/general/notifications.php';
         </div>
     </article>
 </section>
+
+<?php
+require __DIR__ . '/general/footer.php';
+?>

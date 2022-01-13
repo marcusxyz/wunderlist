@@ -18,14 +18,39 @@ main {
 
 .task-container {
   width: 100%;
-  background-color: var(--form-gray);
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 2rem;
-
   display: flex;
   flex-direction: column;
+  background-color: #eff7f9;
   gap: 1rem;
+}
+
+.task-container.today {
+  background-color: #f9f6eb;
+}
+
+.task-container.completed {
+  background-color: #ebebf9;
+}
+
+.task-container.done {
+  background-color: transparent;
+  border: 1px solid var(--gray);
+  height: 240px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-message {
+  text-align: center;
+}
+
+.task-message h3 {
+  margin-bottom: 0.5rem;
 }
 
 .task-item {

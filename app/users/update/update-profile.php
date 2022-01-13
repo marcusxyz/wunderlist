@@ -13,7 +13,6 @@ if (isset($_SESSION['user'])) {
     redirect('/signin.php');
 }
 
-
 // If fields are unchanged while saving, display error message.
 if ($username === $_POST['username'] && $email === $_POST['email'] && empty($_POST['password']) && empty($_POST['password-new']) && empty($_POST['password-confirm'])) {
     $_SESSION['error'] = 'No changes has been made';

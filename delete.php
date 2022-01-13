@@ -46,4 +46,6 @@ if (!isset($_SESSION['user'])) {
 
 </section>
 
-<script src="/assets/js/index.js"></script>
+<?php
+require __DIR__ . '/general/footer.php';
+?>

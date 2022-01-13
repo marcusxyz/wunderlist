@@ -12,7 +12,6 @@ if (!isset($_SESSION['user'])) {
 // In here users can delete tasks along with their subtasks
 
 $taskID = $_SESSION['task']['id'];
-$task_name = $_SESSION['task']['task_name'];
 
 // First we delete all subtasks that belongs to the task
 $statement = $database->prepare('DELETE from lists WHERE task_id = :task_id');

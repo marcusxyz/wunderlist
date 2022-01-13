@@ -80,7 +80,8 @@ $userProfile = $_SESSION['user']['avatar'];
     <a href="/delete.php" style="display: block;">
         <button class="btn secondary-full">Delete account</button>
     </a>
-
 </section>
 
-<script src="/assets/js/index.js"></script>
+<?php
+require __DIR__ . '/general/footer.php';
+?>

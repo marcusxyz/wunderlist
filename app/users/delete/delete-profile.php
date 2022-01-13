@@ -14,7 +14,6 @@ if (isset($_SESSION['user'])) {
 }
 
 // In here users can delete their account
-
 if (isset($_POST['delete'])) {
     $deleteConfirm = $_POST['delete'];
 
@@ -34,6 +33,19 @@ if (isset($_POST['delete'])) {
 
     if (isset($_POST['password'])) {
         $password = $_POST['password'];
+
+        // Make sure to remove tasks and subtasks related to user before deleting account.
+        $taskID = $_SESSION['task']['id'];
+
+        // Delete subtasks
+        $statement = $database->prepare('DELETE from lists WHERE task_id = :task_id');
+        $statement->bindParam(':task_id', $taskID, PDO::PARAM_INT);
+        $statement->execute();
+
+        // Delete tasks
+        $statement = $database->prepare('DELETE from tasks WHERE user_id  = :user_id');
+        $statement->bindParam(':user_id', $id, PDO::PARAM_INT);
+        $statement->execute();
 
         if (password_verify($password, $user['password'])) {
             $statement = $database->prepare('DELETE FROM users WHERE id = :id');
