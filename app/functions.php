@@ -14,7 +14,7 @@ function fetchTasks(PDO $database): array
     $status = 0;
     $today = date('D j M Y');
 
-    $statement = $database->query('SELECT * FROM tasks WHERE user_id = :user_id AND due_date != :due_date AND status = :status ORDER BY due_date DESC');
+    $statement = $database->query('SELECT * FROM tasks WHERE user_id = :user_id AND due_date != :due_date AND status = :status ORDER BY due_date ASC');
     $statement->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $statement->bindParam(':due_date', $today, PDO::PARAM_STR);
     $statement->bindParam(':status', $status, PDO::PARAM_INT);
