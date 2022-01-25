@@ -85,3 +85,59 @@ function taskCompleted(PDO $database): array
     $getCompletedTasks = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $getCompletedTasks;
 }
+
+function searchTasks(PDO $database, $search): array
+{
+
+    $search = "%$search%";
+    $userID = $_SESSION['user']['id'];
+
+    $statement = $database->prepare('SELECT * FROM tasks WHERE task_name LIKE :search AND user_id = :user_id');
+    $statement->bindParam(':user_id', $userID, PDO::PARAM_STR);
+    $statement->bindParam(':search', $search, PDO::PARAM_STR);
+    $statement->execute();
+
+    $getTasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $getTasks;
+}
+
+
+// Function using Mailtrap sends email when register
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+function sendMail()
+{
+
+    require __DIR__ . '/../welcomeEmail/src/Exception.php';
+    require __DIR__ . '/../welcomeEmail/src/PHPMailer.php';
+    require __DIR__ . '/../welcomeEmail/src/SMTP.php';
+
+
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->Host = 'smtp.mailtrap.io';
+    $mail->SMTPAuth = true;
+    $mail->Username = '40b335426a4187';
+    $mail->Password = '39081dda571bc9';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 2525;
+
+    $mail->setFrom('info@mailtrap.io', 'Mailtrap');
+    $mail->addReplyTo('info@mailtrap.io', 'Mailtrap');
+    $mail->addAddress('recipient1@mailtrap.io', 'Susanne');
+    $mail->addCC('cc1@example.com', 'Elena');
+    $mail->addBCC('bcc1@example.com', 'Alex');
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Welcome to Wunderlist';
+    $mail->Body = '<h1> We are glad to have you as a new member! </h1>';
+    $mail->AltBody = 'Start creating and editing your tasks today.';
+
+    if ($mail->send()) {
+        echo 'Message has been sent';
+    } else {
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
+};
