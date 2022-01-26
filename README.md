@@ -62,3 +62,5 @@ Johanna Jönsson added:
 
     1. As a user I'm able to read a welcome email when I've created a new account.
     2. As a user I'm able to search for tasks.
+
+Link to [pull request](https://github.com/marcusxyz/wunderlist/pull/2).
