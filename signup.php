@@ -26,6 +26,7 @@ require __DIR__ . '/general/notifications.php';
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" placeholder="Enter your email" required>
                 </div>
+
                 <div class="form">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Must be atleast 8 characters long" required>
