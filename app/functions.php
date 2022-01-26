@@ -140,4 +140,4 @@ function sendMail()
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     }
-};
+}

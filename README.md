@@ -55,3 +55,10 @@ Tested by the following people:
 
 1. Christopher Michael
 2. Johanna Jönsson
+
+# Wunderlist +
+
+Johanna Jönsson added:
+
+    1. As a user I'm able to read a welcome email when I've created a new account.
+    2. As a user I'm able to search for tasks.
