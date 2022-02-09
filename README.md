@@ -1,5 +1,3 @@
-INSERT MANDATORY GIF
-
 # Wunderlist - A simple to do list
 
 A task management application built with PHP. It takes tasks submitted by user in a form and saves them in a SQLite database. PDO is used to access the database and present the results.
@@ -55,3 +53,12 @@ Tested by the following people:
 
 1. Christopher Michael
 2. Johanna Jönsson
+
+# Wunderlist +
+
+Johanna Jönsson added:
+
+    1. As a user I'm able to read a welcome email when I've created a new account.
+    2. As a user I'm able to search for tasks.
+
+Link to [pull request](https://github.com/marcusxyz/wunderlist/pull/2).
