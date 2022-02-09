@@ -8,7 +8,6 @@ $_SESSION['taskID'] = $_GET['id'];
 
 // Saving function to a new shorter variable
 $editTask = editTasks($database);
-
 ?>
 
 <!-- Edit user submitted tasks here -->
