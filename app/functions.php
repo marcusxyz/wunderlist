@@ -33,13 +33,14 @@ function editTasks(PDO $database): array
 
     $getTask = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION['task'] = [
+    [
         'id' => $getTask['id'],
         'task_name' => $getTask['task_name'],
         'due_date' => $getTask['due_date'],
         'task_notes' => $getTask['task_notes'],
         'status' => $getTask['status'],
     ];
+
     return $getTask;
 }
 
@@ -140,4 +141,4 @@ function sendMail()
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     }
-};
+}

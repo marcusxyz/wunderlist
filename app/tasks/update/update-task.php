@@ -14,9 +14,9 @@ if (isset($_POST['task_name'], $_POST['due_date'], $_POST['task_notes'])) {
     $taskName = trim($_POST['task_name']);
     $dueDate = trim($_POST['due_date']);
     $taskNotes = trim($_POST['task_notes']);
-    $_POST['task_name'] = $_SESSION['task']['task_name'];
-    $_POST['due_date'] = $_SESSION['task']['due_date'];
-    $_POST['task_notes'] = $_SESSION['task']['task_notes'];
+    $_POST['task_name'] = $editTask['task_name'];
+    $_POST['due_date'] = $editTask['due_date'];
+    $_POST['task_notes'] = $editTask['task_notes'];
 
     // If fields are unchanged while saving, display error message.
     if ($taskName === $_POST['task_name'] && $dueDate === $_POST['due_date'] && $taskNotes === $_POST['task_notes']) {

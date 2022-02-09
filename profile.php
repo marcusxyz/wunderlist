@@ -30,9 +30,10 @@ $userProfile = $_SESSION['user']['avatar'];
             </div>
             <div class="links">
                 <form action="app/users/update/update-avatar.php" method="POST" enctype="multipart/form-data">
-                    <a href=""><label for="avatar" class="link-pfp">Change profile picture</label></a>
-                    <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png, .gif" style=" display: none;">
-                    <input type="submit" style="display: none;">
+                    <a href=""><label for="avatar" class="link-pfp">Change profile picture</label>
+                        <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png, .gif" style=" display: none;">
+                        <input type="submit" style="display: none;">
+                    </a>
                 </form>
                 <?php if (isset($userProfile)) : ?>
                     <form action="app/users/delete/delete-avatar.php" method="POST" enctype="multipart/form-data">
